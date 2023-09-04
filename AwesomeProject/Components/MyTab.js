@@ -2,21 +2,30 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import DataList1 from './DataList1';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Search from './Search';
 import Alert from './Alert';
+import Colors from './Colors';
 
 const Tab = createBottomTabNavigator();
 function MyTab() {
+
+
+
+
+
   return (
 
     <Tab.Navigator
+    
       screenOptions={({ route }) => ({
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
         style: {
           borderRadius: 15,
-          height: 90,
+          height: 50,
         },
+        tabBarActiveTintColor:Colors.primaryLite,
         tabBarIcon: ({ color }) => {
           let iconName;
 
@@ -53,7 +62,7 @@ function MyTab() {
             backgroundColor: '#FC345C',
 
           },
-
+   
         }} />
 
       <Tab.Screen name="Search" component={Search} options={{

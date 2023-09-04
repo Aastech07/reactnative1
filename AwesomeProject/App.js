@@ -7,6 +7,7 @@ import MyTab from './Components/MyTab';
 import Register from './Components/Registers';
 import SearchList from './Components/SearchList';
 import ViewCom from './Components/ViewCom';
+import MyTab1 from './Components/MyTab1';
 const stack = createNativeStackNavigator();
 
 export default function App() {
@@ -35,6 +36,15 @@ export default function App() {
         
         
         }} component={ViewCom} />
+
+<stack.Screen name='MyTab1' options={{ headerShown: true ,
+                headerStyle: {
+                  backgroundColor: "#FC345C"
+                }
+        
+        
+        }} component={MyTab1} />
+
 
 
 

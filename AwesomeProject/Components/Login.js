@@ -63,7 +63,7 @@ const Login = ({ navigation }) => {
 
             <View style={{ top: 160, left: 20 }}>
               <TouchableOpacity
-                onPress={() => navigation.navigate('MyTab')}
+                onPress={() => navigation.navigate('MyTab1')}
               >
 
                 <Text style={styles.button1}>Login</Text>
