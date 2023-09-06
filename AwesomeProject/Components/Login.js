@@ -1,9 +1,11 @@
 import React from 'react'
 import { Text, StyleSheet, View, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Button, Alert, } from 'react-native'
 
+
 import { useState } from 'react'
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import Colors from './Colors'
 
 const Login = ({ navigation }) => {
 
@@ -16,7 +18,7 @@ const Login = ({ navigation }) => {
     setSecure(!secure);
   }
   return (
-    <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#F5F5F5' }} behavior='height'>
+    <KeyboardAvoidingView style={{ flex: 1, backgroundColor:"#ffff"  }} behavior='height'>
       <ScrollView style={{ flex: 1, top: 10 }}>
 
 
@@ -34,7 +36,7 @@ const Login = ({ navigation }) => {
             }}>Welcome! </Text>
 
 
-            <View style={{ top: 130, left: 5 }}>
+            <View style={{ top: 130, right:10 }}>
               <Text style={styles.text}>Number</Text>
               <FontAwesome5 name="phone-volume" size={25} color="black" style={{ left: 50, top: 25, opacity: 0.3, }} />
               <TextInput style={styles.input}
@@ -44,8 +46,8 @@ const Login = ({ navigation }) => {
                 keyboardType='numeric' />
 
               <Text style={styles.text}>Password</Text>
-              <FontAwesome5 name="lock" size={25} color="black" style={{ left: 50, top: 25, opacity: 0.3 }} />
-              <TextInput style={styles.input}
+              <FontAwesome5 name="lock" size={25} color="black" style={{ left: 49, top: 20, opacity: 0.3 }} />
+              <TextInput style={styles.input1}
                 placeholder="Enter your Password"
                 onChangeText={text => setPassword(text)}
                 value={password}
@@ -53,7 +55,7 @@ const Login = ({ navigation }) => {
 
 
               <TouchableOpacity onPress={() => togglePass()}>
-                <Text style={{ left: 310, bottom: 60 }}>{secure ? <FontAwesome5 name='eye' size={17} color={"black"} /> : <FontAwesome5 name='eye-slash' size={17} color={"black"} />}</Text>
+<Text style={{ left: 300, bottom: 55 }}>{secure ? <FontAwesome5 name='eye' size={17} color={"black"} /> : <FontAwesome5 name='eye-slash' size={17} color={"black"} />}</Text>
               </TouchableOpacity>
             </View>
 
@@ -63,7 +65,7 @@ const Login = ({ navigation }) => {
 
             <View style={{ top: 160, left: 20 }}>
               <TouchableOpacity
-                onPress={() => navigation.navigate('MyTab1')}
+                onPress={() => navigation.navigate('MyTab')}
               >
 
                 <Text style={styles.button1}>Login</Text>
@@ -111,9 +113,11 @@ const styles = StyleSheet.create({
   input: {
     marginLeft: 50,
     marginRight: 50,
-    padding: 20,
+    padding: 10,
     bottom: 20,
-    left: 20,
+    left: 25,
+    borderWidth: 1,
+    borderRadius:8
   },
 
   text: {
@@ -139,7 +143,16 @@ const styles = StyleSheet.create({
     shadowRadius: 16.00,
     elevation: 24,
 
-  },
+  }, input1: {
+    marginLeft: 50,
+    marginRight: 50,
+    padding: 8,
+    bottom: 20,
+    left: 25,
+    borderWidth: 1,
+    borderRadius:8,
+    
+  }
 
 
 

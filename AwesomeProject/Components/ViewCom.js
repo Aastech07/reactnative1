@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { View, FlatList, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, Image, Button } from 'react-native'
 import * as ImagePicker from 'expo-image-picker';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -9,21 +9,11 @@ const ViewCom = () => {
     const [image, setImage] = useState(null);
     const [text, setText] = useState("")
     const [isModalVisible, setModalVisible] = useState(false);
-    const [rbSheet, setRBSheet] = useState(refRBSheet);
+
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
-
-    const toggleModal1 = () => {
-        setRBSheet(true)
-    };
-
-
-    const refRBSheet = useRef();
-
-
-
 
 
     const pickImage = async () => {
@@ -66,28 +56,6 @@ const ViewCom = () => {
 
     return (
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-
-<Button title="OPEN BOTTOM SHEET" onPress={() => toggleModal1} />
-                                            <RBSheet
-                                                ref={refRBSheet}
-                                                height={300}
-                                                openDuration={250}
-                                                customStyles={{
-                                                    container: {
-                                                        justifyContent: "center",
-                                                        alignItems: "center"
-                                                    }
-                                                }}
-                                            >
-                                               
-                                            </RBSheet>
-
-
-
-
-
-
-
 
             <FlatList
                 style={{ height: 500, top: 10 }}
@@ -179,7 +147,7 @@ const ViewCom = () => {
 
                                                 value={text}
                                             />
-      
+
 
 
 

@@ -1,89 +1,184 @@
-import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import DataList1 from './DataList1';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Search from './Search';
-import Alert from './Alert';
-import Colors from './Colors';
-
-const Tab = createBottomTabNavigator();
-function MyTab() {
-
-
+import React from 'react';
+import {
+  Alert,
+  Animated,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { CurvedBottomBarExpo } from 'react-native-curved-bottom-bar';
+import Ionicons from 'react-native-vector-icons/FontAwesome5';
+import { NavigationContainer } from '@react-navigation/native';
 
 
+
+
+const Screen1 = () => {
+  return <View style={styles.screen1} />;
+};
+
+const Screen2 = () => {
+  return <View style={styles.screen2} />;
+};
+const Screen3 = () => {
+  return <View style={styles.Screen3} />;
+};
+const Screen4 = () => {
+  return <View style={styles.Screen4} />;
+};
+
+
+export default function App() {
+  const _renderIcon = (routeName, selectedTab) => {
+    let icon = '';
+
+    switch (routeName) {
+      case 'title1':
+        icon = 'home';
+        break;
+      case 'title2':
+        icon = 'search';
+        break;
+      case 'title3':
+        icon = 'bell';
+        break;
+      case 'title4':
+        icon = 'hands-helping';
+        break;
+    }
+
+    return (
+      <Ionicons
+        name={icon}
+        size={25}
+        color={routeName === selectedTab ? 'blue' : 'gray'}
+      />
+    );
+  };
+  const renderTabBar = ({ routeName, selectedTab, navigate }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => navigate(routeName)}
+        style={styles.tabbarItem}
+      >
+        {_renderIcon(routeName, selectedTab)}
+      </TouchableOpacity>
+    );
+  };
 
   return (
+    <NavigationContainer>
+      <CurvedBottomBarExpo.Navigator
+        type="DOWN"
+        style={styles.bottomBar}
+        shadowStyle={styles.shawdow}
+        height={55}
+        circleWidth={50}
+        bgColor="white"
+        initialRouteName="title1"
+        borderTopLeftRight
+        renderCircle={({ selectedTab, navigate }) => (
+          <Animated.View style={styles.btnCircleUp}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => Alert.alert('Click Action')}
+            >
+              <Ionicons name={'plus'} color="gray" size={25} />
+            </TouchableOpacity>
+          </Animated.View>
+        )}
+        tabBar={renderTabBar}
+      >
+        <CurvedBottomBarExpo.Screen
+          name="title1"
+          position="LEFT"
+          component={() => <Screen1 />}
+        />
+        <CurvedBottomBarExpo.Screen
+          name="title2"
+          component={() => <Screen2 />}
+          position="LEFT"
+        />
+        <CurvedBottomBarExpo.Screen
+          name="title3"
+          component={() => <Screen3 />}
+          position="RIGHT"
+        />
+        <CurvedBottomBarExpo.Screen
+          name="title4"
+          position="RIGHT"
+          component={() => <Screen4 />}
+        />
 
-    <Tab.Navigator
-    
-      screenOptions={({ route }) => ({
-        tabBarShowLabel: false,
-        tabBarHideOnKeyboard: true,
-        style: {
-          borderRadius: 15,
-          height: 50,
-        },
-        tabBarActiveTintColor:Colors.primaryLite,
-        tabBarIcon: ({ color }) => {
-          let iconName;
-
-          switch (route.name) {
-            case 'DataList':
-              iconName = 'house-user';
-              break;
-
-            case 'Search':
-              iconName = 'searchengin';
-              break;
-            case 'Alert':
-              iconName = 'bell';
-              break;
-          }
-          return <Icon name={iconName} color={color} size={22} />;
-        },
-        tabBarStyle: {
-          position: 'absolute',
-          bottom: 10,
-          left: 10,
-          right: 10,
-          elevation: 10,
-          backgroundColor: '#ffffff',
-          height: 55,
-          borderRadius: 6,
-        },
-
-      })}>
-      <Tab.Screen name="DataList" component={DataList1}
-        options={{
-          title: ' Home',
-          headerStyle: {
-            backgroundColor: '#FC345C',
-
-          },
-   
-        }} />
-
-      <Tab.Screen name="Search" component={Search} options={{
-        title: ' Search',
-        headerStyle: {
-          backgroundColor: '#FC345C',
-        }
-
-      }} />
-      <Tab.Screen name="Alert" component={Alert} options={{
-        title: ' Alert',
-        headerStyle: {
-          backgroundColor: '#FC345C',
-        }
-
-
-      }} />
-
-    </Tab.Navigator>
-
-  )
+      </CurvedBottomBarExpo.Navigator>
+    </NavigationContainer>
+  );
 }
 
-export default MyTab
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  shawdow: {
+    shadowColor: '#DDDDDD',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 5,
+  },
+  button: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  bottomBar: {},
+  btnCircleUp: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#E8E8E8',
+    bottom: 30,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 1,
+  },
+  imgCircle: {
+    width: 30,
+    height: 30,
+    tintColor: 'gray',
+  },
+  tabbarItem: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  img: {
+    width: 30,
+    height: 30,
+  },
+  screen1: {
+    flex: 1,
+    backgroundColor: '#BFEFFF',
+  },
+  screen2: {
+    flex: 1,
+    backgroundColor: '#FFEBCD',
+  },
+  Screen3: {
+    flex: 1,
+    backgroundColor: '#FFEBCD',
+  },
+  Screen4: {
+    flex: 1,
+    backgroundColor: '#FFEBCD',
+  },
+});
