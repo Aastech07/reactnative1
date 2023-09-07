@@ -11,11 +11,11 @@ import {
 import { CurvedBottomBarExpo } from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/FontAwesome5';
 import { NavigationContainer } from '@react-navigation/native';
-import ReactBubblyEffectButton from './Components/React-bubbly-effect-button';
+import Post from './Components/Post';
 const Screen1 = () => {
   return <View style={styles.screen1}>
-    <Text><ReactBubblyEffectButton /></Text>
-    </View>
+     <Post/>
+  </View>
 };
 
 const Screen2 = () => {
@@ -52,7 +52,7 @@ export default function App() {
       <Ionicons
         name={icon}
         size={25}
-        color={routeName === selectedTab ? 'blue' : 'gray'}
+        color={routeName === selectedTab ? 'black' : 'gray'}
       />
 
     );
