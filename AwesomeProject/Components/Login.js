@@ -1,159 +1,124 @@
 import React from 'react'
-import { Text, StyleSheet, View, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Button, Alert, } from 'react-native'
-import {  Button } from "@react-native-material/core"
+import { Text, View, TouchableOpacity, Button, Image, StyleSheet, SafeAreaView, KeyboardAvoidingViewBase } from 'react-native'
+import { themeColors } from './Theme/ThemeColor';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { Sae } from 'react-native-textinput-effects';
 
-import { useState } from 'react'
-
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import Colors from './Colors'
 
 const Login = ({ navigation }) => {
+  const saeInput = (
+    <Sae
+      label={'Number'}
+      iconClass={FontAwesome5}
+      iconName={'phone-alt'}
+      iconColor={'#150485'}
+      inputPadding={16}
+      labelHeight={24}
+      borderHeight={2}
+      autoCapitalize={'none'}
+      autoCorrect={false}
+      keyboardType='numeric'
+      style={{ marginLeft: 30, marginRight: 30, }}
+    />
 
-  const [number, setNumber] = useState('')
-  const [password, setPassword] = useState('')
-  const [secure, setSecure] = useState('')
+  );
+  const saeInput1 = (
+    <Sae
+      label={'Password'}
+      iconClass={FontAwesome5}
+      iconName={'lock'}
+      iconColor={'#150485'}
+      inputPadding={16}
+      labelHeight={30}
+      borderHeight={2}
+      autoCapitalize={'none'}
+      autoCorrect={false}
 
+      style={{ marginLeft: 30, marginRight: 30, padding: 10, }}
 
-  const togglePass = () => {
-    setSecure(!secure);
-  }
+    />
+  );
+
   return (
-    <KeyboardAvoidingView style={{ flex: 1, backgroundColor:"#ffff"  }} behavior='height'>
-      <ScrollView style={{ flex: 1, top: 10 }}>
 
 
-        <View style={{ bottom: 50, }}>
-          <View style={{ bottom: 20, }}>
+    <SafeAreaView style={{ backgroundColor: "#150485", flex: 1 }}>
+      <Image source={require("../assets/myimage.jpg")} style={{ position: 'absolute', alignSelf: 'center', top: 100, borderRadius: 50, height: 60, width: 60, padding: 50 }} />
+      <View style={{
+        paddingTop: 50, backgroundColor: '#fff', top: 250, flex: 1, borderTopLeftRadius: 50, borderTopRightRadius: 50,
+        shadowColor: "#FC345C",
+        shadowOffset: {
+          width: 0,
+          height: 50,
+        },
+        shadowOpacity: 0.8,
+        shadowRadius: 16.00,
+        elevation: 24,
+      }}>
+        <View style={{ alignItems: 'center', justifyContent: "center" }}>
+          <Text style={{
+            color: '#150485', fontSize: 30, fontWeight: '800', bottom: 20,
+
+
+          }}>Welcome!</Text>
+          <TouchableOpacity >
+            <Text style={{ color: '#3E54AC', fontWeight: '500', top: 160, left: 100, }}>Forgot Password?</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{
+            padding: 13,
+            borderRadius: 5, backgroundColor: "#150485",
+            shadowColor: themeColors.bg,
+            shadowOffset: {
+              width: 0,
+              height: 50,
+            },
+            shadowOpacity: 0.8,
+            shadowRadius: 16.00,
+            elevation: 24,
+            top: 250, position: 'absolute',
+            paddingLeft: 150,
+            paddingRight: 150
+
+          }}   onPress={() => navigation.navigate('MyTab')}>
             <Text style={{
-              alignSelf: 'center',
-              fontWeight: 'bold',
-              marginBottom: 20,
-              fontSize: 30,
-              top: 120,
-
-
-
-            }}>Welcome! </Text>
-
-
-            <View style={{ top: 130, right:10 }}>
-              <Text style={styles.text}>Number</Text>
-              <FontAwesome5 name="phone-volume" size={25} color="black" style={{ left: 50, top: 25, opacity: 0.3, }} />
-              <TextInput style={styles.input}
-                placeholder="Enter your Number"
-                onChangeText={text => setNumber(text)}
-                value={number}
-                keyboardType='numeric' />
-
-              <Text style={styles.text}>Password</Text>
-              <FontAwesome5 name="lock" size={25} color="black" style={{ left: 49, top: 20, opacity: 0.3 }} />
-              <TextInput style={styles.input1}
-                placeholder="Enter your Password"
-                onChangeText={text => setPassword(text)}
-                value={password}
-                secureTextEntry={secure ? false : true} />
-
-
-              <TouchableOpacity onPress={() => togglePass()}>
-<Text style={{ left: 300, bottom: 55 }}>{secure ? <FontAwesome5 name='eye' size={17} color={"black"} /> : <FontAwesome5 name='eye-slash' size={17} color={"black"} />}</Text>
-              </TouchableOpacity>
-            </View>
-
-            <TouchableOpacity >
-              <Text style={{ left: 225, top: 120, color: '#FC345C', fontWeight: '500' }}>Forgot Password?</Text>
+              alignSelf: "center", color: 'white', fontWeight: '700'
+            }}>Login</Text>
+          </TouchableOpacity>
+          <View style={{ alignContent: 'center', alignItems: "center", right: 20 }}>
+            <Text style={styles.login}>Don't have a Account:</Text>
+            <TouchableOpacity>
+              <Text style={styles.login1} >sign up</Text>
             </TouchableOpacity>
-
-            <View style={{ top: 160, left: 20 }}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('MyTab')}
-              >
-
-                <Text style={styles.button1}>Login</Text>
-
-              </TouchableOpacity>
-            </View>
-            <View style={{ alignItems: 'center', paddingTop: 200, right: 30 }}>
-              <Text style={styles.login}>Don't have a Account:</Text>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Register')}
-              >
-                <Text style={styles.login1} >sign up</Text>
-              </TouchableOpacity>
-            </View>
-
           </View>
 
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
 
-  )
-}
+        <View style={{ flex: 1, bottom: 25 }}>
+          {saeInput}
+          {saeInput1}
+        </View>
 
-export default Login
+      </View>
+
+    </SafeAreaView>
+
+  );
+};
+
+export default Login;
 const styles = StyleSheet.create({
 
   login: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    position: 'absolute',
+    top: 292
   },
   login1: {
-    marginTop: 8,
+
     fontSize: 16,
-    color: '#FC345C',
-    left: 110,
-    bottom: 30
+    color: '#150485',
+    left: 75,
+    position: 'absolute',
+    top: 290
   },
-
-  hip: {
-    left: 15,
-    marginBottom: 22
-
-  },
-
-  input: {
-    marginLeft: 50,
-    marginRight: 50,
-    padding: 10,
-    bottom: 20,
-    left: 25,
-    borderWidth: 1,
-    borderRadius:8
-  },
-
-  text: {
-    left: 50,
-    fontWeight: 'bold'
-  },
-
-  button1: {
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 15,
-    color: 'white',
-    marginLeft: 20,
-    marginRight: 40,
-    padding: 12,
-    backgroundColor: '#83193f',
-    borderRadius: 5,
-    shadowOffset: {
-      width: 0,
-      height: 50,
-    },
-    shadowOpacity: 0.8,
-    shadowRadius: 16.00,
-    elevation: 24,
-
-  }, input1: {
-    marginLeft: 50,
-    marginRight: 50,
-    padding: 8,
-    bottom: 20,
-    left: 25,
-    borderWidth: 1,
-    borderRadius:8,
-    
-  }
-
-
-
 });

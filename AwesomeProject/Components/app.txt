@@ -3,19 +3,24 @@ import {
   Alert,
   Animated,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
+  
 } from 'react-native';
 import { CurvedBottomBarExpo } from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/FontAwesome5';
 import { NavigationContainer } from '@react-navigation/native';
 
+import Login from './Components/Login';
 const Screen1 = () => {
-  return <View style={styles.screen1} />;
+  return <View style={styles.screen1}>
+  
+  </View>
 };
 
 const Screen2 = () => {
-  return <View style={styles.screen2} />;
+  return <View style={styles.screen2}/>;
 };
 const Screen3 = () => {
   return <View style={styles.Screen3} />;
@@ -25,7 +30,7 @@ const Screen4 = () => {
 };
 
 
-export default function MyTab() {
+export default function App() {
   const _renderIcon = (routeName, selectedTab) => {
     let icon = '';
 
@@ -48,8 +53,9 @@ export default function MyTab() {
       <Ionicons
         name={icon}
         size={25}
-        color={routeName === selectedTab ? 'blue' : 'gray'}
+        color={routeName === selectedTab ? 'black' : 'gray'}
       />
+
     );
   };
   const renderTabBar = ({ routeName, selectedTab, navigate }) => {
@@ -82,6 +88,7 @@ export default function MyTab() {
             >
               <Ionicons name={'plus'} color="gray" size={25} />
             </TouchableOpacity>
+
           </Animated.View>
         )}
         tabBar={renderTabBar}
@@ -89,7 +96,8 @@ export default function MyTab() {
         <CurvedBottomBarExpo.Screen
           name="title1"
           position="LEFT"
-          component={() => <Screen1 />}
+
+          component={Login}
         />
         <CurvedBottomBarExpo.Screen
           name="title2"

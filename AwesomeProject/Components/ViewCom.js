@@ -15,7 +15,6 @@ const ViewCom = () => {
         setModalVisible(!isModalVisible);
     };
 
-
     const pickImage = async () => {
 
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -24,8 +23,6 @@ const ViewCom = () => {
             aspect: [4, 3],
             quality: 1,
         });
-
-
 
         if (!result.canceled) {
             setImage(result.assets[0].uri);
