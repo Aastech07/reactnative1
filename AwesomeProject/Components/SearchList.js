@@ -1,7 +1,7 @@
 import React from 'react'
-import { View, FlatList, Pressable, StyleSheet, Text,TouchableOpacity } from 'react-native'
-
-const SearchList = ({navigation}) => {
+import { View, FlatList, Pressable, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { themeColors } from './Theme/ThemeColor'
+const SearchList = ({ navigation }) => {
 
     const Local_data = [
         {
@@ -23,6 +23,7 @@ const SearchList = ({navigation}) => {
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
 
             <FlatList
+           
                 style={{ height: 500, top: 10 }}
                 data={Local_data}
                 numColumns={1}
@@ -42,8 +43,8 @@ const SearchList = ({navigation}) => {
                                 padding: 5,
                                 bottom: 150,
                                 borderRadius: 5,
-                                backgroundColor: "#FC345C",
-                                shadowColor: "#FC345C",
+                                backgroundColor:themeColors.bg,
+                                shadowColor:themeColors.bg,
                                 shadowOffset: {
                                     width: 0,
                                     height: 50,
@@ -51,13 +52,16 @@ const SearchList = ({navigation}) => {
                                 shadowOpacity: 0.8,
                                 shadowRadius: 16.00,
                                 elevation: 24,
-                                top: 10
+                                top: 10,
+                                paddingLeft: 20,
+                                paddingRight: 20,
+                                left: 15
+
                             }}
-                            onPress={() => navigation.navigate('ViewCom')}
-                            >
+                                onPress={() => navigation.navigate('ViewCom')}>
                                 <Text style={{
                                     alignSelf: "center", color: 'white', fontWeight: '700'
-                                }}>View Com...</Text>
+                                }}>View complaint</Text>
                             </TouchableOpacity>
 
                         </View>

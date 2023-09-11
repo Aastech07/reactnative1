@@ -18,7 +18,8 @@ export default function App() {
         <stack.Screen name='Register' options={{
           headerStyle: {
             backgroundColor: "#FC345C"
-          }
+          },
+          headerShown:false
         }} component={Register} />
         <stack.Screen name='MyTab' options={{ headerShown: false }} component={MyTab} />
         <stack.Screen name='SearchList' options={{ headerShown: true ,

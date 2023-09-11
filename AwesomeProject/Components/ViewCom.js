@@ -4,7 +4,8 @@ import * as ImagePicker from 'expo-image-picker';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Modal from "react-native-modal";
 import RBSheet from "react-native-raw-bottom-sheet";
-
+import { themeColors } from './Theme/ThemeColor';
+import { responsiveFontSize, responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 const ViewCom = () => {
     const [image, setImage] = useState(null);
     const [text, setText] = useState("")
@@ -47,6 +48,37 @@ const ViewCom = () => {
             Action: "Assigned to BD Damodar - 9702854850",
             Update_By: "System"
 
+        }, {
+            id: "1",
+            Data: "Leakage in Chilren bathroom",
+            SR_No: "89748",
+            Project: "OHP",
+            Department: "Civil (BD Damodar)",
+            Locations: "2003 Preston",
+            Name: "Parag joshi",
+            Mobile_No: "9892858655",
+            Available_Time: "10:00am to 6:00pm",
+            Date: "24-Aug-2023 09:02am",
+            Status: "Assigned",
+            Action: "Assigned to BD Damodar - 9702854850",
+            Update_By: "System"
+
+        },
+        {
+            id: "2",
+            Data: "Leakage in Chilren bathroom",
+            SR_No: "89748",
+            Project: "OHP",
+            Department: "Civil (BD Damodar)",
+            Locations: "2003 Preston",
+            Name: "Parag joshi",
+            Mobile_No: "9892858655",
+            Available_Time: "10:00am to 6:00pm",
+            Date: "24-Aug-2023 09:02am",
+            Status: "Assigned",
+            Action: "Assigned to BD Damodar - 9702854850",
+            Update_By: "System"
+
         },
 
     ]
@@ -55,7 +87,8 @@ const ViewCom = () => {
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
 
             <FlatList
-                style={{ height: 500, top: 10 }}
+
+                style={{ height: 630, top: 10, }}
                 data={Local_data}
                 numColumns={1}
                 renderItem={({ item }) => (
@@ -109,8 +142,8 @@ const ViewCom = () => {
                             <View style={{ flex: 1 }}>
                                 <TouchableOpacity style={{
                                     marginTop: 10, padding: 5,
-                                    borderRadius: 5, backgroundColor: "#FC345C",
-                                    shadowColor: "#FC345C",
+                                    borderRadius: 5, backgroundColor: themeColors.bg1,
+                                    shadowColor: themeColors.bg1,
                                     shadowOffset: {
                                         width: 0,
                                         height: 50,
@@ -118,15 +151,37 @@ const ViewCom = () => {
                                     shadowOpacity: 0.8,
                                     shadowRadius: 16.00,
                                     elevation: 24,
-                                    marginLeft: 60,
-                                    marginRight: 60,
-                                    top: 10, right: 60
+
+                                    top: 10,
 
                                 }} onPress={() => toggleModal()}>
                                     <Text style={{
                                         alignSelf: "center", color: 'white', fontWeight: '700'
-                                    }}>Update Sta..</Text>
+                                    }}>Update Status</Text>
                                 </TouchableOpacity>
+
+                                <TouchableOpacity style={{
+                                    marginTop: 10, padding: 5,
+                                    borderRadius: 5, backgroundColor: themeColors.bg,
+                                    shadowColor: themeColors.bg,
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 50,
+                                    },
+                                    shadowOpacity: 0.8,
+                                    shadowRadius: 16.00,
+                                    elevation: 24,
+
+                                    top: 10,
+
+                                }} onPress={() => toggleModal()}>
+                                    <Text style={{
+                                        alignSelf: "center", color: 'white', fontWeight: '700'
+                                    }}>RE-ASSIGN COMPLAINANT</Text>
+                                </TouchableOpacity>
+
+
+
                                 <Modal isVisible={isModalVisible}>
                                     <View style={{ flex: 1 }}>
                                         <Text>Hello!</Text>
@@ -146,12 +201,8 @@ const ViewCom = () => {
                                             />
 
 
-
-
-
-
                                             <View style={{ alignItems: 'center', justifyContent: 'center', top: 100 }}>
-                                                <Text style={{ fontWeight: '700', fontSize: 14, color: 'white' }}>Report 1:</Text>
+                                                <Text style={{ fontWeight: '700', fontSize: 14, color: 'white', right: responsiveWidth(25), top: 5 }}>Report 1:</Text>
                                                 <TouchableOpacity style={{
                                                     marginTop: 10, padding: 5,
                                                     borderRadius: 5, backgroundColor: "#FC345C",
@@ -203,106 +254,9 @@ const ViewCom = () => {
                                         </View >
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
                                     </View>
                                 </Modal>
                             </View>
-
-
-                            {/* <View style={{ top: 20 }}>
-                                <Text style={{ fontWeight: 'bold', }}>{item.Data}</Text>
-                                <Text style={{ fontWeight: '500', top: 4 }}>Response:</Text>
-                                <TextInput style={styles.input}
-                                    placeholder="Response"
-                                    onChangeText={text => setText(text)}
-                                
-                                    value={text}
-                                />
-
-
-                               <View style={{ bottom: 50 }}>
-                                    <Text style={{ fontWeight: '700',fontSize:14,top:3 }}>Report 1:</Text>
-                                    <TouchableOpacity style={{
-                                        marginTop: 10, padding: 5,
-                                        borderRadius: 5, backgroundColor: "#FC345C",
-                                        marginLeft: 70, marginRight: 70,
-                                        shadowColor: "#FC345C",
-                                        shadowOffset: {
-                                            width: 0,
-                                            height: 50,
-                                        },
-                                        shadowOpacity: 0.8,
-                                        shadowRadius: 16.00,
-                                        elevation: 24,
-                                        left: 10,
-                                        bottom:30,
-                                        opacity:0.9
-                                    }} onPress={()=>pickImage()}>
-                                       <FontAwesome5 name="images" size={21} color="black" style={{  opacity: 0.3 , alignSelf:'center' }} />
-                                    </TouchableOpacity>
-
-                             
-                                    <TouchableOpacity style={{
-                                        marginTop: 10, padding: 5,
-                                        borderRadius: 5, backgroundColor: "#FC345C",
-                                        marginLeft: 70, marginRight: 70,
-                                        shadowColor: "#FC345C",
-                                        shadowOffset: {
-                                            width: 0,
-                                            height: 50,
-                                        },
-                                        shadowOpacity: 0.8,
-                                        shadowRadius: 16.00,
-                                        elevation: 24,
-                                        left: 100,
-                                        bottom:71,
-                                        
-                                    }}>
-                                       <FontAwesome5 name="camera" size={21} color="black" style={{  opacity: 0.3 , alignSelf:'center' }} />
-                                    </TouchableOpacity>
-                                    <View>
-
-                              {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-                                    </View>
-
-
-
-                                </View>
-
-
-                                </View >*/}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                         </View>
                     </Pressable>)} />
