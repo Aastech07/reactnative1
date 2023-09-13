@@ -8,12 +8,16 @@ import Register from './Components/Registers';
 import SearchList from './Components/SearchList';
 import ViewCom from './Components/ViewCom';
 import MyTab1 from './Components/MyTab1';
+import Data from './Components/Data';
+
 const stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
       <stack.Navigator>
+       
+
         <stack.Screen name='Login' options={{ headerShown: false }} component={Login} />
         <stack.Screen name='Register' options={{
           headerStyle: {
@@ -26,28 +30,28 @@ export default function App() {
                 headerStyle: {
                   backgroundColor: "#FC345C"
                 }
-        
-        
+                
+                
         }} component={SearchList} />
 
 <stack.Screen name='ViewCom' options={{ headerShown: true ,
                 headerStyle: {
                   backgroundColor: "#FC345C"
                 }
-        
-        
-        }} component={ViewCom} />
+                
+                
+              }} component={ViewCom} />
 
 <stack.Screen name='MyTab1' options={{ headerShown: true ,
                 headerStyle: {
                   backgroundColor: "#FC345C"
                 }
-        
-        
-        }} component={MyTab1} />
+                
+                
+              }} component={MyTab1} />
 
 
-
+<stack.Screen name='Data' options={{ headerShown: false }} component={Data} />
 
 
       </stack.Navigator>
