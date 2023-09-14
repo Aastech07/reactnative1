@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { View, FlatList, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, Image, Button } from 'react-native'
+import { View, FlatList, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, Image, Button, ScrollView } from 'react-native'
 import * as ImagePicker from 'expo-image-picker';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Modal from "react-native-modal";
@@ -7,6 +7,47 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { themeColors } from './Theme/ThemeColor';
 import { Camera } from 'expo-camera';
 import { responsiveFontSize, responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import { Dropdown } from 'react-native-element-dropdown';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { flex } from 'react-native-wind/dist/styles/flex/flex';
+
+
+const data = [
+    { label: 'Select Status', value: '1' },
+    { label: 'Customer not available', value: '2' },
+    { label: 'Customer requested to Visit Later', value: '3' },
+    { label: 'Need spares', value: '4' },
+    { label: 'Need to revisit', value: '5' },
+    { label: 'Need third party intervention', value: '6' },
+    { label: 'Out of Warranty', value: '7' },
+    { label: 'Site not ready', value: '8' },
+    { label: 'Rescheduled Visit', value: '9' },
+    { label: 'Under Observation', value: '10' },
+    { label: 'Out of scope', value: '11' },
+    { label: 'Attended and closed the call', value: '12' },
+    { label: 'in Society Scope', value: '13' },
+    { label: 'others', value: '14' },
+];
+
+const data1 = [
+    { label: 'Select Status', value1: '1' },
+    { label: 'Customer not available', value1: '2' },
+    { label: 'Customer requested to Visit Later', value1: '3' },
+    { label: 'Need spares', value1: '4' },
+    { label: 'Need to revisit', value1: '5' },
+    { label: 'Need third party intervention', value1: '6' },
+    { label: 'Out of Warranty', value1: '7' },
+    { label: 'Site not ready', value1: '8' },
+    { label: 'Rescheduled Visit', value1: '9' },
+    { label: 'Under Observation', value1: '10' },
+    { label: 'Out of scope', value1: '11' },
+    { label: 'Attended and closed the call', value1: '12' },
+    { label: 'in Society Scope', value1: '13' },
+    { label: 'others', value1: '14' },
+];
+
+
+
 
 const ViewCom = ({ navigation }) => {
     const [image, setImage] = useState(null);
@@ -15,51 +56,6 @@ const ViewCom = ({ navigation }) => {
     const [isModalVisible1, setModalVisible1] = useState(false);
     const [shouldShow, setShouldShow] = useState();
     const [shouldShow1, setShouldShow1] = useState();
-
-
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(['Customer not available',
-        'Customer requested to Visit Later', 'Need spares', 'Need to revisit', 'Need third party intervention',
-        'Out of Warranty', 'Site not ready', 'Rescheduled Visit', 'Under observation ', 'Out of scope ', 'Attended and closed the call ',
-        'in Society Scope ', 'Others ',
-    ]);
-    const [items, setItems] = useState([
-
-        { label: 'Customer not available', value: 'Customer not available' },
-        { label: 'Customer requested to Visit Later', value: 'Customer requested to Visit Later', },
-        { label: 'Need spares', value: 'Need spares', parent: 'Need spares' },
-
-        { label: 'Need to revisit', value: 'Need to revisit' },
-        { label: 'Need third party intervention', value: 'Need third party intervention', },
-
-        { label: 'Out of Warranty', value: 'Out of Warranty' },
-
-        { label: 'Site not ready', value: 'Site not ready' },
-        { label: 'Rescheduled Visit', value: 'Rescheduled Visit' },
-        { label: 'Under observation ', value: 'Under observation' },
-        { label: 'Out of scope ', value: 'Out of scope' },
-
-        { label: 'Attended and closed the call ', value: 'Attended and closed the call' },
-        { label: 'in Society Scope ', value: 'in Society Scope' },
-        { label: 'Others ', value: 'Others' },
-
-    ]);
-
-    const [open1, setOpen1] = useState(false);
-    const [value1, setValue1] = useState(['italy', 'spain', 'barcelona', 'finland']);
-    const [items1, setItems1] = useState([
-        { label: 'Spain', value: 'spain' },
-        { label: 'Madrid', value: 'madrid', parent: 'spain' },
-        { label: 'Barcelona', value: 'barcelona', parent: 'spain' },
-
-        { label: 'Italy', value: 'italy' },
-        { label: 'Rome', value: 'rome', parent: 'italy' },
-
-        { label: 'Finland', value: 'finland' }
-    ]);
-
-
-
 
 
     const toggleModal = () => {
@@ -80,7 +76,30 @@ const ViewCom = ({ navigation }) => {
         }
     };
 
-
+    const [value, setValue] = useState(null);
+    const [isFocus, setIsFocus] = useState(false);
+    const [value1, setValue1] = useState(null);
+    const [isFocus1, setIsFocus1] = useState(false);
+    const renderLabel = () => {
+        if (value || isFocus) {
+            return (
+                <Text style={[styles.label, isFocus && { color: themeColors.bg }]}>
+                    Dropdown List
+                </Text>
+            );
+        }
+        return null;
+    };
+    const renderLabel1 = () => {
+        if (value1 || isFocus1) {
+            return (
+                <Text style={[styles.label1, isFocus1 && { color: themeColors.bg }]}>
+                    Dropdown List
+                </Text>
+            );
+        }
+        return null;
+    };
 
     const Local_data = [
         {
@@ -98,29 +117,45 @@ const ViewCom = ({ navigation }) => {
             Action: "Assigned to BD Damodar - 9702854850",
             Update_By: "System"
 
-        },
+        },        {
+            id: "1",
+            Data: "Leakage in Chilren bathroom",
+            SR_No: "89748",
+            Project: "OHP",
+            Department: "Civil (BD Damodar)",
+            Locations: "2003 Preston",
+            Name: "Parag joshi",
+            Mobile_No: "9892858655",
+            Available_Time: "10:00am to 6:00pm",
+            Date: "24-Aug-2023 09:02am",
+            Status: "Assigned",
+            Action: "Assigned to BD Damodar - 9702854850",
+            Update_By: "System"
 
+        }, 
     ]
 
     return (
-        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <ScrollView style={{ flex: 1 }}>
 
             <FlatList
 
-                style={{ height: 630, top: 10, }}
+                style={{}}
                 data={Local_data}
                 numColumns={1}
                 renderItem={({ item }) => (
-                    <Pressable style={styles.container}>
+                    <Pressable style={{
+                    margin: 5, marginHorizontal: 15,left:20 }}>
+                        
                         <View style={styles.innerContainer}>
-                            <Text style={{ fontWeight: 'bold', bottom: 5 }}>{item.Data}</Text>
-                            <Text style={{ fontWeight: '500' }}>SR_No:{item.SR_No}</Text>
-                            <Text style={{ fontWeight: '500', }}>Project:{item.Project}</Text>
-                            <Text style={{ fontWeight: '500', }}>Date : {item.Department}</Text>
-                            <Text style={{ fontWeight: '500', bottom: 2 }}>Location :{item.Locations}</Text>
-                            <Text style={{ fontWeight: '500', bottom: 2 }}>Name :{item.Name}</Text>
-                            <Text style={{ fontWeight: '500', bottom: 2 }}>Mobile_No :{item.Mobile_No}</Text>
-                            <Text style={{ fontWeight: '500', bottom: 2 }}>Available_Time :{item.Available_Time}</Text>
+                            <Text style={{ fontWeight: 'bold', bottom: 5, fontSize: responsiveFontSize(2) }}>{item.Data}</Text>
+                            <Text style={{ fontWeight: '500', fontSize: responsiveFontSize(1.9) }}>SR_No:{item.SR_No}</Text>
+                            <Text style={{ fontWeight: '500', fontSize: responsiveFontSize(1.9) }}>Project:{item.Project}</Text>
+                            <Text style={{ fontWeight: '500', fontSize: responsiveFontSize(1.9) }}>Date : {item.Department}</Text>
+                            <Text style={{ fontWeight: '500', bottom: 2, fontSize: responsiveFontSize(1.9) }}>Location :{item.Locations}</Text>
+                            <Text style={{ fontWeight: '500', bottom: 2, fontSize: responsiveFontSize(1.9) }}>Name :{item.Name}</Text>
+                            <Text style={{ fontWeight: '500', bottom: 2, fontSize: responsiveFontSize(1.9) }}>Mobile_No :{item.Mobile_No}</Text>
+                            <Text style={{ fontWeight: '500', bottom: 2, fontSize: responsiveFontSize(1.9) }}>Available_Time :{item.Available_Time}</Text>
 
                             <View style={{
                                 borderBottomWidth: 1, top: 4,
@@ -137,11 +172,11 @@ const ViewCom = ({ navigation }) => {
 
                             </View>
                             <View style={{ top: 8 }}>
-                                <Text style={{ fontWeight: 'bold', }}>{item.Data}</Text>
-                                <Text style={{ fontWeight: '500', top: 4 }}>Date:{item.Date}</Text>
-                                <Text style={{ fontWeight: '500', top: 4 }}>Status:{item.Status}</Text>
-                                <Text style={{ fontWeight: '500', top: 4 }}>Action:{item.Action}</Text>
-                                <Text style={{ fontWeight: '500', top: 4 }}>Update_By:{item.Update_By}</Text>
+                                <Text style={{ fontWeight: 'bold', fontSize: responsiveFontSize(2) }}>{item.Data}</Text>
+                                <Text style={{ fontWeight: '500', top: 4, fontSize: responsiveFontSize(1.9) }}>Date:{item.Date}</Text>
+                                <Text style={{ fontWeight: '500', top: 4, fontSize: responsiveFontSize(1.9) }}>Status:{item.Status}</Text>
+                                <Text style={{ fontWeight: '500', top: 4, fontSize: responsiveFontSize(1.9) }}>Action:{item.Action}</Text>
+                                <Text style={{ fontWeight: '500', top: 4, fontSize: responsiveFontSize(1.9) }}>Update_By:{item.Update_By}</Text>
                             </View>
 
 
@@ -192,62 +227,84 @@ const ViewCom = ({ navigation }) => {
                                                         <Text style={{ fontWeight: 'bold', bottom: 5 }}>ADD ACTION AGAINST COMPLAINANT</Text>
 
                                                         <Text style={{ fontWeight: '500', fontSize: 17 }}>Status:</Text>
-                                                        <View style={{
-                                                            backgroundColor: '#171717',
 
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center',
-
-
-                                                        }}>
-                                                            <DropDownPicker
-                                                                open={open}
+                                                        <View style={styles.container}>
+                                                            {renderLabel()}
+                                                            <Dropdown
+                                                                style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                                                                placeholderStyle={styles.placeholderStyle}
+                                                                selectedTextStyle={styles.selectedTextStyle}
+                                                                inputSearchStyle={styles.inputSearchStyle}
+                                                                iconStyle={styles.iconStyle}
+                                                                data={data}
+                                                                search
+                                                                maxHeight={300}
+                                                                labelField="label"
+                                                                valueField="value"
+                                                                placeholder={!isFocus ? 'Select item' : '...'}
+                                                                searchPlaceholder="Search..."
                                                                 value={value}
-                                                                items={items}
-                                                                setOpen={setOpen}
-                                                                setValue={setValue}
-                                                                setItems={setItems}
-                                                                style={{ padding: 50 }}
-                                                                theme="DARK"
-                                                                multiple={true}
-                                                                mode="BADGE"
-                                                                badgeDotColors={["#e76f51", "#00b4d8", "#e9c46a", "#e76f51", "#8ac926", "#00b4d8", "#e9c46a"]}
-
+                                                                onFocus={() => setIsFocus(true)}
+                                                                onBlur={() => setIsFocus(false)}
+                                                                onChange={item => {
+                                                                    setValue(item.value);
+                                                                    setIsFocus(false);
+                                                                }}
+                                                                renderLeftIcon={() => (
+                                                                    <AntDesign
+                                                                        style={styles.icon}
+                                                                        color={isFocus ? 'blue' : 'black'}
+                                                                        name="Safety"
+                                                                        size={20}
+                                                                    />
+                                                                )}
                                                             />
                                                         </View>
+
+
+
+
                                                         <Text style={{ fontWeight: '500', fontSize: 17 }}>Ready Response:</Text>
-                                                        <View style={{
-                                                            backgroundColor: '#171717',
-                                                            flex: 1,
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center',
-
-                                                        }}>
-                                                            <DropDownPicker
-                                                                open={open1}
+                                                        <View style={styles.container}>
+                                                            {renderLabel1()}
+                                                            <Dropdown
+                                                                style={[styles.dropdown, isFocus1 && { borderColor: 'blue' }]}
+                                                                placeholderStyle={styles.placeholderStyle}
+                                                                selectedTextStyle={styles.selectedTextStyle}
+                                                                inputSearchStyle={styles.inputSearchStyle}
+                                                                iconStyle={styles.iconStyle}
+                                                                data={data1}
+                                                                search
+                                                                maxHeight={300}
+                                                                labelField="label"
+                                                                valueField="value1"
+                                                                placeholder={!isFocus1 ? 'Select item' : '...'}
+                                                                searchPlaceholder="Search..."
                                                                 value={value1}
-                                                                items={items1}
-                                                                setOpen={setOpen1}
-                                                                setValue={setValue1}
-                                                                setItems={setItems1}
-                                                                style={{ padding: 50 }}
-                                                                theme="DARK"
-                                                                multiple={true}
-                                                                mode="BADGE"
-                                                                badgeDotColors={["#e76f51", "#00b4d8", "#e9c46a", "#e76f51", "#8ac926", "#00b4d8", "#e9c46a"]}
-
+                                                                onFocus={() => setIsFocus1(true)}
+                                                                onBlur={() => setIsFocus1(false)}
+                                                                onChange={item => {
+                                                                    setValue1(item.value1);
+                                                                    setIsFocus1(false);
+                                                                }}
+                                                                renderLeftIcon={() => (
+                                                                    <AntDesign
+                                                                        style={styles.icon}
+                                                                        color={isFocus1 ? 'blue' : 'black'}
+                                                                        name="Safety"
+                                                                        size={20}
+                                                                    />
+                                                                )}
                                                             />
                                                         </View>
+
+
+
                                                         <Text style={{ fontWeight: '500', fontSize: 17 }}> Response:</Text>
                                                         <TextInput
                                                             multiline={true}
                                                             numberOfLines={5}
-                                                            style={{  textAlignVertical: 'top',backgroundColor:themeColors.bg1,borderRadius:6 }} />
-
-
-
-
-
+                                                            style={{ textAlignVertical: 'top', backgroundColor: '#fff', borderRadius: 6 }} />
 
                                                     </View>
                                                 </Pressable>)} /> : null}
@@ -264,7 +321,7 @@ const ViewCom = ({ navigation }) => {
                                     shadowOpacity: 0.8,
                                     shadowRadius: 16.00,
                                     elevation: 24,
-                                    top: 10,
+
 
                                 }} onPress={() => setShouldShow(!shouldShow)}>
                                     <Text style={{
@@ -377,35 +434,30 @@ const ViewCom = ({ navigation }) => {
                             </View>
 
                         </View>
-                    </Pressable>)} />
+
+                    </Pressable>)}
+            />
 
 
-        </View>
+        </ScrollView>
     )
 }
 
 export default ViewCom;
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#e5e5e5',
-        padding: 15,
-        borderRadius: 15,
-        margin: 5,
-        marginHorizontal: 20,
-        paddingLeft: 50,
-        paddingRight: 50,
-        shadowColor: "black",
-        shadowOffset: {
-            width: 0,
-            height: 50,
-        },
-        shadowOpacity: 0.9,
-        shadowRadius: 19.00,
-        elevation: 20,
+    container1: {
+        backgroundColor: '#fff',
+
+
+
+
+
     },
     innerContainer: {
         right: 20,
+
+
 
     }, input: {
         marginLeft: 50,
@@ -423,6 +475,59 @@ const styles = StyleSheet.create({
     fixedRatio: {
         flex: 1,
         aspectRatio: 1
-    }
+    }, container: {
+
+
+
+    },
+    dropdown: {
+        height: 50,
+        borderColor: 'black',
+        borderWidth: 2,
+        borderRadius: 8,
+        paddingHorizontal: 8,
+
+        top: responsiveHeight(0.5)
+
+
+    },
+    icon: {
+        marginRight: 5,
+    },
+    label: {
+        position: 'absolute',
+        backgroundColor: '#fff',
+        left: 30,
+        zIndex: 999,
+        paddingHorizontal: 8,
+        fontSize: 14,
+        borderBottomColor: 'gray',
+        borderWidth: 1,
+    },
+    label1: {
+        position: 'absolute',
+        backgroundColor: '#fff',
+        left: 30,
+        zIndex: 999,
+        paddingHorizontal: 8,
+        fontSize: 14,
+        borderBottomColor: 'gray',
+        borderWidth: 1,
+
+    },
+    placeholderStyle: {
+        fontSize: 16,
+    },
+    selectedTextStyle: {
+        fontSize: 16,
+    },
+    iconStyle: {
+        width: 20,
+        height: 20,
+    },
+    inputSearchStyle: {
+        height: 40,
+        fontSize: 16,
+    },
 
 });

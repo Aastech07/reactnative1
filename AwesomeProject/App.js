@@ -9,49 +9,50 @@ import SearchList from './Components/SearchList';
 import ViewCom from './Components/ViewCom';
 import MyTab1 from './Components/MyTab1';
 import Data from './Components/Data';
-
+import { themeColors } from './Components/Theme/ThemeColor';
+themeColors
 const stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
       <stack.Navigator>
-       
 
         <stack.Screen name='Login' options={{ headerShown: false }} component={Login} />
         <stack.Screen name='Register' options={{
           headerStyle: {
             backgroundColor: "#FC345C"
           },
-          headerShown:false
+          headerShown: false
         }} component={Register} />
         <stack.Screen name='MyTab' options={{ headerShown: false }} component={MyTab} />
-        <stack.Screen name='SearchList' options={{ headerShown: true ,
-                headerStyle: {
-                  backgroundColor: "#FC345C"
-                }
-                
-                
+        <stack.Screen name='SearchList' options={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: "#FC345C"
+          }
         }} component={SearchList} />
 
-<stack.Screen name='ViewCom' options={{ headerShown: true ,
-                headerStyle: {
-                  backgroundColor: "#FC345C"
-                }
-                
-                
-              }} component={ViewCom} />
-
-<stack.Screen name='MyTab1' options={{ headerShown: true ,
-                headerStyle: {
-                  backgroundColor: "#FC345C"
-                }
-                
-                
-              }} component={MyTab1} />
+        <stack.Screen name='ViewCom' options={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: themeColors.bg
+          }
 
 
-<stack.Screen name='Data' options={{ headerShown: false }} component={Data} />
+        }} component={ViewCom} />
+
+        <stack.Screen name='MyTab1' options={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor:themeColors.bg1
+          }
+
+
+        }} component={MyTab1} />
+
+
+        <stack.Screen name='Data' options={{ headerShown: false }} component={Data} />
 
 
       </stack.Navigator>
