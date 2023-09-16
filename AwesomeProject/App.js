@@ -8,7 +8,7 @@ import Register from './Components/Registers';
 import SearchList from './Components/SearchList';
 import ViewCom from './Components/ViewCom';
 import MyTab1 from './Components/MyTab1';
-import Data from './Components/Data';
+import Media from './Components/Media';
 import { themeColors } from './Components/Theme/ThemeColor';
 themeColors
 const stack = createNativeStackNavigator();
@@ -52,7 +52,7 @@ export default function App() {
         }} component={MyTab1} />
 
 
-        <stack.Screen name='Data' options={{ headerShown: false }} component={Data} />
+        <stack.Screen name='Media' options={{ headerShown: false }} component={Media} />
 
 
       </stack.Navigator>
