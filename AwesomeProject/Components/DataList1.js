@@ -1,6 +1,11 @@
-import React, { useEffect } from 'react';
-import { View, SafeAreaView, StyleSheet, Text, Platform, UIManager, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, SafeAreaView, StyleSheet, Text, Platform, UIManager, Image, Button, TouchableOpacity, TextInput } from 'react-native';
 import { AccordionList } from 'react-native-accordion-list-view';
+import Modal from "react-native-modal";
+import { themeColors } from './Theme/ThemeColor';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { LinearGradient } from 'expo-linear-gradient';
+import { responsiveFontSize, responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 
 
 const DataList1 = () => {
@@ -78,8 +83,12 @@ const DataList1 = () => {
                 UIManager.setLayoutAnimationEnabledExperimental(true);
             }
         }
+
     }, []);
+
+
     return (
+
         <SafeAreaView>
             <View style={styles.container}>
                 <AccordionList
@@ -133,9 +142,14 @@ const DataList1 = () => {
                         ,
                         top: 8
                     }}
-
                 />
             </View>
+
+
+
+
+
+
         </SafeAreaView>
     );
 };
@@ -147,6 +161,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: '2%',
         height: '100%',
         backgroundColor: 'white',
-
     },
+
+
 });

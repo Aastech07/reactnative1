@@ -1,304 +1,205 @@
-import React, { useState, useRef } from 'react'
-import { View, FlatList, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, Image, Button } from 'react-native'
-import * as ImagePicker from 'expo-image-picker';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Modal from "react-native-modal";
-import RBSheet from "react-native-raw-bottom-sheet";
-import { themeColors } from './Theme/ThemeColor';
+import React from 'react';
+import {
+  Alert,
+  Animated,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 
-import { responsiveFontSize, responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
-const ViewCom = () => {
-    const [image, setImage] = useState(null);
-    const [text, setText] = useState("")
-    const [isModalVisible, setModalVisible] = useState(false);
+} from 'react-native';
+import { CurvedBottomBarExpo } from 'react-native-curved-bottom-bar';
+import Ionicons from 'react-native-vector-icons/FontAwesome5';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import Search from './Components/Search';
+import SearchList from './Components/SearchList';
+import ViewCom from './Components/ViewCom';
+import DataList1 from './Components/DataList1';
 
-    const toggleModal = () => {
-        setModalVisible(!isModalVisible);
-    };
+const stack = createNativeStackNavigator();
 
-    const pickImage = async () => {
-
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-
-        if (!result.canceled) {
-            setImage(result.assets[0].uri);
-        }
-    };
-
-
-
-    const Local_data = [
-        {
-            id: "0",
-            Data: "Leakage in Chilren bathroom",
-            SR_No: "89748",
-            Project: "OHP",
-            Department: "Civil (BD Damodar)",
-            Locations: "2003 Preston",
-            Name: "Parag joshi",
-            Mobile_No: "9892858655",
-            Available_Time: "10:00am to 6:00pm",
-            Date: "24-Aug-2023 09:02am",
-            Status: "Assigned",
-            Action: "Assigned to BD Damodar - 9702854850",
-            Update_By: "System"
-
-        }, {
-            id: "1",
-            Data: "Leakage in Chilren bathroom",
-            SR_No: "89748",
-            Project: "OHP",
-            Department: "Civil (BD Damodar)",
-            Locations: "2003 Preston",
-            Name: "Parag joshi",
-            Mobile_No: "9892858655",
-            Available_Time: "10:00am to 6:00pm",
-            Date: "24-Aug-2023 09:02am",
-            Status: "Assigned",
-            Action: "Assigned to BD Damodar - 9702854850",
-            Update_By: "System"
-
-        },
-        {
-            id: "2",
-            Data: "Leakage in Chilren bathroom",
-            SR_No: "89748",
-            Project: "OHP",
-            Department: "Civil (BD Damodar)",
-            Locations: "2003 Preston",
-            Name: "Parag joshi",
-            Mobile_No: "9892858655",
-            Available_Time: "10:00am to 6:00pm",
-            Date: "24-Aug-2023 09:02am",
-            Status: "Assigned",
-            Action: "Assigned to BD Damodar - 9702854850",
-            Update_By: "System"
-
-        },
-
-    ]
-
-    return (
-        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-
-            <FlatList
-
-                style={{ height: 630, top: 10, }}
-                data={Local_data}
-                numColumns={1}
-                renderItem={({ item }) => (
-                    <Pressable style={styles.container}>
-                        <View style={styles.innerContainer}>
-                            <Text style={{ fontWeight: 'bold', bottom: 5 }}>{item.Data}</Text>
-                            <Text style={{ fontWeight: '500' }}>SR_No:{item.SR_No}</Text>
-                            <Text style={{ fontWeight: '500', }}>Project:{item.Project}</Text>
-                            <Text style={{ fontWeight: '500', }}>Date : {item.Department}</Text>
-                            <Text style={{ fontWeight: '500', bottom: 2 }}>Location :{item.Locations}</Text>
-                            <Text style={{ fontWeight: '500', bottom: 2 }}>Name :{item.Name}</Text>
-                            <Text style={{ fontWeight: '500', bottom: 2 }}>Mobile_No :{item.Mobile_No}</Text>
-                            <Text style={{ fontWeight: '500', bottom: 2 }}>Available_Time :{item.Available_Time}</Text>
-
-                            <View style={{
-                                borderBottomWidth: 1, top: 4,
-                                backgroundColor: "#FC345C",
-                                shadowColor: "#FC345C",
-                                shadowOffset: {
-                                    width: 0,
-                                    height: 50,
-                                },
-                                shadowOpacity: 0.9,
-                                shadowRadius: 19.00,
-                                elevation: 20,
-                            }}>
-
-                            </View>
-                            <View style={{ top: 8 }}>
-                                <Text style={{ fontWeight: 'bold', }}>{item.Data}</Text>
-                                <Text style={{ fontWeight: '500', top: 4 }}>Date:{item.Date}</Text>
-                                <Text style={{ fontWeight: '500', top: 4 }}>Status:{item.Status}</Text>
-                                <Text style={{ fontWeight: '500', top: 4 }}>Action:{item.Action}</Text>
-                                <Text style={{ fontWeight: '500', top: 4 }}>Update_By:{item.Update_By}</Text>
-                            </View>
-
-                            <View style={{
-                                borderBottomWidth: 1, top: 17,
-                                backgroundColor: "#FC345C",
-                                shadowColor: "#FC345C",
-                                shadowOffset: {
-                                    width: 0,
-                                    height: 50,
-                                },
-                                shadowOpacity: 0.9,
-                                shadowRadius: 19.00,
-                                elevation: 20,
-                            }}>
-                            </View>
-
-                            <View style={{ flex: 1 }}>
-                                <TouchableOpacity style={{
-                                    marginTop: 10, padding: 5,
-                                    borderRadius: 5, backgroundColor: themeColors.bg1,
-                                    shadowColor: themeColors.bg1,
-                                    shadowOffset: {
-                                        width: 0,
-                                        height: 50,
-                                    },
-                                    shadowOpacity: 0.8,
-                                    shadowRadius: 16.00,
-                                    elevation: 24,
-
-                                    top: 10,
-
-                                }} onPress={() => toggleModal()}>
-                                    <Text style={{
-                                        alignSelf: "center", color: 'white', fontWeight: '700'
-                                    }}>Update Status</Text>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity style={{
-                                    marginTop: 10, padding: 5,
-                                    borderRadius: 5, backgroundColor: themeColors.bg,
-                                    shadowColor: themeColors.bg,
-                                    shadowOffset: {
-                                        width: 0,
-                                        height: 50,
-                                    },
-                                    shadowOpacity: 0.8,
-                                    shadowRadius: 16.00,
-                                    elevation: 24,
-
-                                    top: 10,
-
-                                }} onPress={() => toggleModal()}>
-                                    <Text style={{
-                                        alignSelf: "center", color: 'white', fontWeight: '700'
-                                    }}>RE-ASSIGN COMPLAINANT</Text>
-                                </TouchableOpacity>
-
-
-
-                                <Modal isVisible={isModalVisible}>
-                                    <View style={{ flex: 1 }}>
-                                        <Text>Hello!</Text>
-
-                                        <TouchableOpacity onPress={() => toggleModal()}>
-                                            <FontAwesome5 name='arrow-left' size={26} color={"white"} style={{ position: 'absolute', bottom: 5 }} />
-                                        </TouchableOpacity>
-
-                                        <View style={{ top: 40 }}>
-                                            <Text style={{ fontWeight: 'bold', color: 'white' }}>{item.Data}</Text>
-                                            <Text style={{ fontWeight: '500', top: 16, color: "white", fontSize: 16 }}>Response:</Text>
-                                            <TextInput style={styles.input}
-                                                placeholder="Response"
-                                                onChangeText={text => setText(text)}
-
-                                                value={text}
-                                            />
-
-
-                                            <View style={{ alignItems: 'center', justifyContent: 'center', top: 100 }}>
-                                                <Text style={{ fontWeight: '700', fontSize: 14, color: 'white', right: responsiveWidth(25), top: 5 }}>Report 1:</Text>
-                                                <TouchableOpacity style={{
-                                                    marginTop: 10, padding: 5,
-                                                    borderRadius: 5, backgroundColor: "#FC345C",
-                                                    marginLeft: 70, marginRight: 70,
-                                                    shadowColor: "#FC345C",
-                                                    shadowOffset: {
-                                                        width: 0,
-                                                        height: 50,
-                                                    },
-                                                    shadowOpacity: 0.8,
-                                                    shadowRadius: 16.00,
-                                                    elevation: 24,
-                                                    left: 10,
-                                                    bottom: 30,
-                                                    opacity: 0.9
-                                                }} onPress={() => pickImage()}>
-                                                    <FontAwesome5 name="images" size={21} color="black" style={{ opacity: 0.3, alignSelf: 'center' }} />
-                                                </TouchableOpacity>
-
-
-                                                <TouchableOpacity style={{
-                                                    marginTop: 10, padding: 5,
-                                                    borderRadius: 5, backgroundColor: "#FC345C",
-                                                    marginLeft: 70, marginRight: 70,
-                                                    shadowColor: "#FC345C",
-                                                    shadowOffset: {
-                                                        width: 0,
-                                                        height: 50,
-                                                    },
-                                                    shadowOpacity: 0.8,
-                                                    shadowRadius: 16.00,
-                                                    elevation: 24,
-                                                    left: 100,
-                                                    bottom: 71,
-
-                                                }}>
-                                                    <FontAwesome5 name="camera" size={21} color="black" style={{ opacity: 0.3, alignSelf: 'center' }} />
-                                                </TouchableOpacity>
-                                                <View>
-
-                                                    {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-                                                </View>
-
-
-
-                                            </View>
-
-
-                                        </View >
-
-
-                                    </View>
-                                </Modal>
-                            </View>
-
-                        </View>
-                    </Pressable>)} />
-
-
-        </View>
-    )
+function Home() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Feed" component={Feed} />
+      <Tab.Screen name="Messages" component={Messages} />
+    </Tab.Navigator>
+  );
 }
 
-export default ViewCom;
 
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#e5e5e5',
-        padding: 15,
-        borderRadius: 15,
-        margin: 5,
-        marginHorizontal: 20,
-        paddingLeft: 50,
-        paddingRight: 50,
-        shadowColor: "black",
-        shadowOffset: {
-            width: 0,
-            height: 50,
-        },
-        shadowOpacity: 0.9,
-        shadowRadius: 19.00,
-        elevation: 20,
+
+
+
+
+const Screen3 = () => {
+  return <View style={styles.Screen3} />;
+};
+const Screen4 = () => {
+  return <View style={styles.Screen4} />;
+};
+
+
+export default function App() {
+  const _renderIcon = (routeName, selectedTab) => {
+    let icon = '';
+
+    switch (routeName) {
+      case 'title1':
+        icon = 'home';
+        break;
+      case 'title2':
+        icon = 'search';
+        break;
+      case 'title3':
+        icon = 'bell';
+        break;
+      case 'title4':
+        icon = 'hands-helping';
+        break;
+    }
+
+    return (
+      <Ionicons
+        name={icon}
+        size={25}
+        color={routeName === selectedTab ? 'black' : 'gray'}
+      />
+
+    );
+  };
+  const renderTabBar = ({ routeName, selectedTab, navigate }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => navigate(routeName)}
+        style={styles.tabbarItem}
+      >
+        {_renderIcon(routeName, selectedTab)}
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <NavigationContainer>
+      <CurvedBottomBarExpo.Navigator
+        type="DOWN"
+        style={styles.bottomBar}
+        shadowStyle={styles.shawdow}
+        height={55}
+        circleWidth={50}
+        bgColor="white"
+        initialRouteName="title1"
+        borderTopLeftRight
+        renderCircle={({ selectedTab, navigate }) => (
+          <Animated.View style={styles.btnCircleUp}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => Alert.alert('Click Action')}
+            >
+              <Ionicons name={'plus'} color="gray" size={25} />
+            </TouchableOpacity>
+
+          </Animated.View>
+        )}
+        tabBar={renderTabBar}
+      >
+        <CurvedBottomBarExpo.Screen
+          name="title1"
+          position="LEFT"
+
+          component={DataList1}
+        />
+        <CurvedBottomBarExpo.Screen
+          name="title2"
+          component={Search}
+          position="LEFT"
+        />
+        <CurvedBottomBarExpo.Screen
+          name="title3"
+          component={() => <Screen3 />}
+          position="RIGHT"
+        />
+        <CurvedBottomBarExpo.Screen
+          name="title4"
+          position="RIGHT"
+          component={() => <Screen4 />}
+        />
+
+        <stack.Screen name='SearchList' options={{ headerShown: true }} component={SearchList} />
+        <stack.Screen name='ViewCom' options={{ headerShown: true }} component={ViewCom} />
+
+      </CurvedBottomBarExpo.Navigator>
+
+    </NavigationContainer>
+  );
+}
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  shawdow: {
+    shadowColor: '#DDDDDD',
+    shadowOffset: {
+      width: 0,
+      height: 0,
     },
-    innerContainer: {
-        right: 20,
-
-    }, input: {
-        marginLeft: 50,
-        marginRight: 50,
-        padding: 5,
-        bottom: 10,
-        left: 30,
-        borderRadius: 8,
-        backgroundColor: 'white'
+    shadowOpacity: 1,
+    shadowRadius: 5,
+  },
+  button: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  bottomBar: {},
+  btnCircleUp: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#E8E8E8',
+    bottom: 30,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
     },
-
-
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 1,
+  },
+  imgCircle: {
+    width: 30,
+    height: 30,
+    tintColor: 'gray',
+  },
+  tabbarItem: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  img: {
+    width: 30,
+    height: 30,
+  },
+  screen1: {
+    flex: 1,
+    backgroundColor: '#BFEFFF',
+  },
+  screen2: {
+    flex: 1,
+    backgroundColor: '#FFEBCD',
+  },
+  Screen3: {
+    flex: 1,
+    backgroundColor: '#FFEBCD',
+  },
+  Screen4: {
+    flex: 1,
+    backgroundColor: '#FFEBCD',
+  },
 });

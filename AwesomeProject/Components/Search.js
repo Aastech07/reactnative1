@@ -53,6 +53,43 @@ const Local_data = [
   },
 ];
 
+const Building_DATA = [
+  {
+    value: '0',
+    lable: 'Select Building',
+  }, {
+    value: '1',
+    lable: 'abcd',
+  }, {
+    value: '2',
+    lable: 'Club House',
+  }, {
+    value: '3',
+    lable: 'Crysta',
+  }, {
+    value: '4',
+    lable: 'infra Gates',
+  }, {
+    value: '5',
+    lable: 'Lotus',
+  },
+
+]
+const Status_Data = [
+  {
+    value: '0',
+    lable: 'Pending complaints',
+  }, {
+    value: '1',
+    lable: 'New',
+  }, {
+    value: '2',
+    lable: 'Opened',
+  }, {
+    value: '3',
+    lable: 'Closed',
+  },
+]
 
 const Search = ({ navigation }) => {
   const [project, setProject] = useState('');
@@ -121,7 +158,7 @@ const Search = ({ navigation }) => {
                 iconStyle={styles.iconStyle}
                 maxHeight={200}
                 value={building}
-                data={Local_data}
+                data={Building_DATA}
                 valueField="value"
                 labelField="lable"
                 imageField="image"
@@ -218,7 +255,7 @@ const Search = ({ navigation }) => {
                 iconStyle={styles.iconStyle}
                 maxHeight={200}
                 value={pendingcomp}
-                data={Local_data}
+                data={Status_Data}
                 valueField="value"
                 labelField="lable"
                 imageField="image"

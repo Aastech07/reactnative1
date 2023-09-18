@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { Text, View, TouchableOpacity, Button, Image, StyleSheet, SafeAreaView, TextInput } from 'react-native'
+import { Text, View, TouchableOpacity,  Image, StyleSheet, SafeAreaView, TextInput } from 'react-native'
 import { themeColors } from './Theme/ThemeColor';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -30,7 +30,7 @@ const Login = ({ navigation }) => {
       <Image source={require("../assets/myimage.jpg")} style={{
         position: 'absolute', alignSelf: 'center', top: 50, borderRadius: responsiveWidth(30), height: responsiveHeight(10),
         width: responsiveWidth(10), padding: responsiveWidth(15)
-      }} />
+      }}/>
 
       <View style={{
         paddingTop: responsiveHeight(7), backgroundColor: '#fff', top: responsiveHeight(28), flex: 1, borderTopLeftRadius: responsiveWidth(12), borderTopRightRadius: responsiveWidth(11),
@@ -88,7 +88,7 @@ const Login = ({ navigation }) => {
                 elevation: 24,
                 marginLeft: responsiveWidth(9),
                 marginRight: responsiveWidth(9)
-              }} onPress={() => navigation.navigate('MyTab1')}>
+              }} onPress={() => navigation.navigate('MyTab')}>
                 <Text style={{
                   alignSelf: "center", color: 'white', fontWeight: '700', fontSize: 17
                 }}>Login</Text>

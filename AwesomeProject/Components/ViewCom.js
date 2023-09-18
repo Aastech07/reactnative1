@@ -62,9 +62,7 @@ const ViewCom = ({ navigation }) => {
     const [image, setImage] = useState(null);
     const [image1, setImage1] = useState(null);
     const [image2, setImage2] = useState(null);
-    const [text, setText] = useState("")
-    const [isModalVisible, setModalVisible] = useState(false);
-    const [isModalVisible1, setModalVisible1] = useState(false);
+    
     const [shouldShow, setShouldShow] = useState();
     const [shouldShow1, setShouldShow1] = useState();
     const [shouldShow2, setShouldShow2] = useState();
@@ -75,10 +73,6 @@ const ViewCom = ({ navigation }) => {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
 
-
-    const toggleModal = () => {
-        setModalVisible(!isModalVisible);
-    };
 
     const pickImage = async () => {
 
@@ -130,6 +124,10 @@ const ViewCom = ({ navigation }) => {
     const [isFocus1, setIsFocus1] = useState(false);
     const [value2, setValue2] = useState(null);
     const [isFocus2, setIsFocus2] = useState(false);
+    const [value3, setValue3] = useState(null);
+    const [isFocus3, setIsFocus3] = useState(false);
+    const [value4, setValue4] = useState(null);
+    const [isFocus4, setIsFocus4] = useState(false);
     const renderLabel = () => {
         if (value || isFocus) {
             return (
@@ -160,6 +158,26 @@ const ViewCom = ({ navigation }) => {
         }
         return null;
     };
+    const renderLabel3 = () => {
+        if (value3 || isFocus3) {
+            return (
+                <Text style={[styles.label1, isFocus4 && { color: themeColors.bg }]}>
+                    Dropdown List
+                </Text>
+            );
+        }
+        return null;
+    };
+    const renderLabel4 = () => {
+        if (value4 || isFocus4) {
+            return (
+                <Text style={[styles.label1, isFocus4 && { color: themeColors.bg }]}>
+                    Dropdown List
+                </Text>
+            );
+        }
+        return null;
+    };
     const Local_data = [
         {
             id: "0",
@@ -177,7 +195,7 @@ const ViewCom = ({ navigation }) => {
             Update_By: "System"
 
         },
-      
+
     ]
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -194,9 +212,9 @@ const ViewCom = ({ navigation }) => {
 
     const onToggleSwitch = () => setShouldShow2(!shouldShow2);
     return (
-       <FlatList
+        <FlatList
 
-            style={{}}
+            style={{marginBottom:40}}
             data={Local_data}
             numColumns={1}
             renderItem={({ item }) => (
@@ -234,163 +252,232 @@ const ViewCom = ({ navigation }) => {
                             <Text style={{ fontWeight: '500', top: 4, fontSize: responsiveFontSize(1.9) }}>Status:{item.Status}</Text>
                             <Text style={{ fontWeight: '500', top: 4, fontSize: responsiveFontSize(1.9) }}>Action:{item.Action}</Text>
                             <Text style={{ fontWeight: '500', top: 4, fontSize: responsiveFontSize(1.9) }}>Update_By:{item.Update_By}</Text>
-                        </View>
 
 
-                        <View style={{
-                            borderBottomWidth: 1, top: 17,
-                            backgroundColor: "#FC345C",
-                            shadowColor: "#FC345C",
-                            shadowOffset: {
-                                width: 0,
-                                height: 50,
-                            },
-                            shadowOpacity: 0.9,
-                            shadowRadius: 19.00,
-                            elevation: 20,
-                        }}>
-                        </View>
 
-                        <View style={{ flex: 1 }}>
-                            <TouchableOpacity style={{
-                                marginTop: 10, padding: 5,
-                                borderRadius: 5, backgroundColor: themeColors.bg1,
-                                shadowColor: themeColors.bg1,
+                            <View style={{
+                                borderBottomWidth: 1, top: 17,
+                                backgroundColor: "#FC345C",
+                                shadowColor: "#FC345C",
                                 shadowOffset: {
                                     width: 0,
                                     height: 50,
                                 },
-                                shadowOpacity: 0.8,
-                                shadowRadius: 16.00,
-                                elevation: 24,
-                                top: 10,
-                            }} onPress={() => setShouldShow1(!shouldShow1)}>
-                                <Text style={{
-                                    alignSelf: "center", color: 'white', fontWeight: '700'
-                                }}>Update Status</Text>
-                            </TouchableOpacity>
-            
-                            <View style={{ marginTop: 10, marginBottom: responsiveHeight(2) }}>
-                                {shouldShow1 ?
+                                shadowOpacity: 0.9,
+                                shadowRadius: 19.00,
+                                elevation: 20,
+                            }}>
+                            </View>
 
-                                    <View style={{ flex: 1 }}>
-                                        <Text style={{ fontWeight: 'bold', }}>ADD ACTION AGAINST COMPLAINANT</Text>
+                            <View style={{ flex: 1 }}>
+                                <TouchableOpacity style={{
+                                    marginTop: 10, padding: 5,
+                                    borderRadius: 5, backgroundColor: themeColors.bg1,
+                                    shadowColor: themeColors.bg1,
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 50,
+                                    },
+                                    shadowOpacity: 0.8,
+                                    shadowRadius: 16.00,
+                                    elevation: 24,
+                                    top: 10,
+                                }} onPress={() => setShouldShow1(!shouldShow1)}>
+                                    <Text style={{
+                                        alignSelf: "center", color: 'white', fontWeight: '700'
+                                    }}>Update Status</Text>
+                                </TouchableOpacity>
 
-                                        <Text style={{ fontWeight: '500', fontSize: 17 }}>Status:</Text>
+                                <View style={{ marginTop: 10, marginBottom: responsiveHeight(2) }}>
+                                    {shouldShow1 ?
 
-                                        <View style={styles.container}>
-                                            {renderLabel()}
-                                            <Dropdown
-                                                style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-                                                placeholderStyle={styles.placeholderStyle}
-                                                selectedTextStyle={styles.selectedTextStyle}
-                                                inputSearchStyle={styles.inputSearchStyle}
-                                                iconStyle={styles.iconStyle}
-                                                data={data}
-                                                search
-                                                maxHeight={300}
-                                                labelField="label"
-                                                valueField="value"
-                                                placeholder={!isFocus ? 'Select item' : '...'}
-                                                searchPlaceholder="Search..."
-                                                value={value}
-                                                onFocus={() => setIsFocus(true)}
-                                                onBlur={() => setIsFocus(false)}
-                                                onChange={item => {
-                                                    setValue(item.value);
-                                                    setIsFocus(false);
-                                                } }
-                                                renderLeftIcon={() => (
-                                                    <AntDesign
-                                                        style={styles.icon}
-                                                        color={isFocus ? 'blue' : 'black'}
-                                                        name="Safety"
-                                                        size={20} />
-                                                )} />
-                                        </View>
+                                        <View style={{ flex: 1 }}>
+                                            <Text style={{ fontWeight: 'bold', }}>ADD ACTION AGAINST COMPLAINANT</Text>
 
-                                        <Text style={{ fontWeight: '500', fontSize: 17 }}>Ready Response:</Text>
-                                        <View style={styles.container}>
-                                            {renderLabel1()}
-                                            <Dropdown
-                                                style={[styles.dropdown, isFocus1 && { borderColor: 'blue' }]}
-                                                placeholderStyle={styles.placeholderStyle}
-                                                selectedTextStyle={styles.selectedTextStyle}
-                                                inputSearchStyle={styles.inputSearchStyle}
-                                                iconStyle={styles.iconStyle}
-                                                data={data1}
-                                                search
-                                                maxHeight={300}
-                                                labelField="label"
-                                                valueField="value1"
-                                                placeholder={!isFocus1 ? 'Select item' : '...'}
-                                                searchPlaceholder="Search..."
-                                                value={value1}
-                                                onFocus={() => setIsFocus1(true)}
-                                                onBlur={() => setIsFocus1(false)}
-                                                onChange={item => {
-                                                    setValue1(item.value1);
-                                                    setIsFocus1(false);
-                                                } }
-                                                renderLeftIcon={() => (
-                                                    <AntDesign
-                                                        style={styles.icon}
-                                                        color={isFocus1 ? 'blue' : 'black'}
-                                                        name="Safety"
-                                                        size={20} />
-                                                )} />
-                                        </View>
-                                        <View style={{ top: 10 }}>
+                                            <Text style={{ fontWeight: '500', fontSize: 17 }}>Status:</Text>
 
-                                            <Text style={{ fontWeight: '500', fontSize: 17 }}> Response:</Text>
-                                            <TextInput
-                                                multiline={true}
-                                                numberOfLines={5}
-                                                style={{ textAlignVertical: 'top', backgroundColor: '#fff', borderRadius: 6 }} />
-                                        </View>
-                                        <View style={{ top: 30 }}>
-                                            <Text style={{ fontWeight: '500', fontSize: 17 }}>Send Technical:-</Text>
-                                            <Switch value={shouldShow2} onValueChange={onToggleSwitch} style={{ right: responsiveWidth(43), bottom: 34 }} />
-                                        </View>
-
-
-                                        {shouldShow2 ? <View style={{ alignContent: 'center', justifyContent: 'center', marginTop: 30, marginBottom: 50 }}>
-
-                                            <View style={{ left: responsiveWidth(30), }}>
-                                                <Text style={{ fontWeight: '500', bottom: responsiveHeight(3), right: responsiveWidth(21), }}> Person Name:</Text>
-                                                <FontAwesome5 name="signature" size={25} color={themeColors.bg1} style={{ right: responsiveWidth(14), opacity: 0.5, bottom: 10, }} />
-                                                <TextInput style={{
-                                                    right: 100,
-                                                    borderBottomWidth: 1,
-                                                    alignSelf: 'center',
-                                                    padding: 4,
-                                                    marginLeft: 87,
-                                                    marginRight: 87, position: 'absolute'
-                                                }}
-                                                    placeholder="Technical Person Name"
-                                                    onChangeText={text => setPersoneName(text)}
-                                                    value={Personname} />
+                                            <View style={styles.container}>
+                                                {renderLabel()}
+                                                <Dropdown
+                                                    style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                                                    placeholderStyle={styles.placeholderStyle}
+                                                    selectedTextStyle={styles.selectedTextStyle}
+                                                    inputSearchStyle={styles.inputSearchStyle}
+                                                    iconStyle={styles.iconStyle}
+                                                    data={data}
+                                                    search
+                                                    maxHeight={300}
+                                                    labelField="label"
+                                                    valueField="value"
+                                                    placeholder={!isFocus ? 'Select item' : '...'}
+                                                    searchPlaceholder="Search..."
+                                                    value={value}
+                                                    onFocus={() => setIsFocus(true)}
+                                                    onBlur={() => setIsFocus(false)}
+                                                    onChange={item => {
+                                                        setValue(item.value);
+                                                        setIsFocus(false);
+                                                    }}
+                                                    renderLeftIcon={() => (
+                                                        <AntDesign
+                                                            style={styles.icon}
+                                                            color={isFocus ? 'blue' : 'black'}
+                                                            name="Safety"
+                                                            size={20} />
+                                                    )} />
                                             </View>
 
-                                            <View style={{ left: responsiveWidth(30), top: 20 }}>
-                                                <Text style={{ fontWeight: '500', bottom: responsiveHeight(3), right: responsiveWidth(20), }}>Person No:</Text>
-                                                <FontAwesome5 name="list-ol" size={25} color={themeColors.bg1} style={{ right: responsiveWidth(14), opacity: 0.5, bottom: 10, }} />
-                                                <TextInput style={{
-                                                    right: 122,
-                                                    borderBottomWidth: 1,
-                                                    alignSelf: 'center',
-                                                    padding: 4,
-                                                    marginLeft: 110,
-                                                    marginRight: 110, position: 'absolute',
-                                                }}
-                                                    placeholder="Tech Person No"
-                                                    onChangeText={text => setTechPersonNo(text)}
-                                                    value={techPerson}
-                                                    keyboardType='numeric' />
+                                            <Text style={{ fontWeight: '500', fontSize: 17 }}>Ready Response:</Text>
+                                            <View style={styles.container}>
+                                                {renderLabel1()}
+                                                <Dropdown
+                                                    style={[styles.dropdown, isFocus1 && { borderColor: 'blue' }]}
+                                                    placeholderStyle={styles.placeholderStyle}
+                                                    selectedTextStyle={styles.selectedTextStyle}
+                                                    inputSearchStyle={styles.inputSearchStyle}
+                                                    iconStyle={styles.iconStyle}
+                                                    data={data1}
+                                                    search
+                                                    maxHeight={300}
+                                                    labelField="label"
+                                                    valueField="value1"
+                                                    placeholder={!isFocus1 ? 'Select item' : '...'}
+                                                    searchPlaceholder="Search..."
+                                                    value={value1}
+                                                    onFocus={() => setIsFocus1(true)}
+                                                    onBlur={() => setIsFocus1(false)}
+                                                    onChange={item => {
+                                                        setValue1(item.value1);
+                                                        setIsFocus1(false);
+                                                    }}
+                                                    renderLeftIcon={() => (
+                                                        <AntDesign
+                                                            style={styles.icon}
+                                                            color={isFocus1 ? 'blue' : 'black'}
+                                                            name="Safety"
+                                                            size={20} />
+                                                    )} />
                                             </View>
-                                            <View style={{ alignContent: 'center', alignItems: 'center', top: 35, left: 15 }}>
+                                            <View style={{ top: 10 }}>
+
+                                                <Text style={{ fontWeight: '500', fontSize: 17 }}> Response:</Text>
+                                                <TextInput
+                                                    multiline={true}
+                                                    numberOfLines={5}
+                                                    style={{ textAlignVertical: 'top', backgroundColor: '#fff', borderRadius: 6 }} />
+                                            </View>
+
+                                            <View style={{ top: 30 }}>
+                                                <Text style={{ fontWeight: '500', fontSize: 17 }}>Send Technical:-</Text>
+                                                <Switch value={shouldShow2} onValueChange={onToggleSwitch} style={{ right: responsiveWidth(43), bottom: 34 }} />
+                                            </View>
+
+
+                                            {shouldShow2 ? <View style={{ alignContent: 'center', justifyContent: 'center', marginTop: 30, marginBottom: 50 }}>
+
+                                                <View style={{ left: responsiveWidth(30), }}>
+                                                    <Text style={{ fontWeight: '500', bottom: responsiveHeight(3), right: responsiveWidth(21), }}> Person Name:</Text>
+                                                    <FontAwesome5 name="signature" size={25} color={themeColors.bg1} style={{ right: responsiveWidth(14), opacity: 0.5, bottom: 10, }} />
+                                                    <TextInput style={{
+                                                        right: 100,
+                                                        borderBottomWidth: 1,
+                                                        alignSelf: 'center',
+                                                        padding: 4,
+                                                        marginLeft: 87,
+                                                        marginRight: 87, position: 'absolute'
+                                                    }}
+                                                        placeholder="Technical Person Name"
+                                                        onChangeText={text => setPersoneName(text)}
+                                                        value={Personname} />
+                                                </View>
+
+                                                <View style={{ left: responsiveWidth(30), top: 20 }}>
+                                                    <Text style={{ fontWeight: '500', bottom: responsiveHeight(3), right: responsiveWidth(20), }}>Person No:</Text>
+                                                    <FontAwesome5 name="list-ol" size={25} color={themeColors.bg1} style={{ right: responsiveWidth(14), opacity: 0.5, bottom: 10, }} />
+                                                    <TextInput style={{
+                                                        right: 122,
+                                                        borderBottomWidth: 1,
+                                                        alignSelf: 'center',
+                                                        padding: 4,
+                                                        marginLeft: 110,
+                                                        marginRight: 110, position: 'absolute',
+                                                    }}
+                                                        placeholder="Tech Person No"
+                                                        onChangeText={text => setTechPersonNo(text)}
+                                                        value={techPerson}
+                                                        keyboardType='numeric' />
+                                                </View>
+                                                <View style={{ alignContent: 'center', alignItems: 'center', top: 35, left: 15 }}>
+                                                    <TouchableOpacity style={{
+                                                        padding: 8,
+                                                        borderRadius: 5, backgroundColor: themeColors.bg1,
+                                                        shadowColor: themeColors.bg1,
+                                                        shadowOffset: {
+                                                            width: 0,
+                                                            height: 50,
+                                                        },
+                                                        shadowOpacity: 0.8,
+                                                        shadowRadius: 16.00,
+                                                        elevation: 24,
+                                                        paddingLeft: 60, paddingRight: 60,
+                                                        top: 45
+                                                    }} onPress={showDatePicker}>
+                                                        <Text style={{
+                                                            alignSelf: "center", color: 'white', fontWeight: '700'
+                                                        }}>Date</Text>
+                                                    </TouchableOpacity>
+                                                    <Text style={{ fontSize: 24, fontWeight: 'bold', bottom: 40 }}>
+                                                        {selectedDate ? selectedDate.toLocaleDateString() : 'No date selected'}
+                                                    </Text>
+                                                    <Text style={{ fontWeight: '500', bottom: responsiveHeight(7), right: responsiveWidth(35), }}>Date:</Text>
+                                                    <FontAwesome5 name="table" size={25} color={themeColors.bg1} style={{ left: responsiveWidth(12), opacity: 0.5, bottom: 10, position: 'absolute' }} />
+                                                    <DateTimePickerModal
+                                                        isVisible={isDatePickerVisible}
+                                                        mode='date'
+                                                        onConfirm={handleConfirm}
+                                                        onCancel={hideDatePicker}
+                                                        date={selectedDate} />
+                                                </View>
+
+                                                <View style={{ alignContent: 'center', justifyContent: 'center', top: 35 }}>
+                                                    <Text style={{ fontWeight: '500', fontSize: 17 }}>Time:</Text>
+                                                    <View style={styles.container}>
+                                                        {renderLabel2()}
+                                                        <Dropdown
+                                                            style={[styles.dropdown, isFocus2 && { borderColor: 'blue' }]}
+                                                            placeholderStyle={styles.placeholderStyle}
+                                                            selectedTextStyle={styles.selectedTextStyle}
+                                                            inputSearchStyle={styles.inputSearchStyle}
+                                                            iconStyle={styles.iconStyle}
+                                                            data={data2}
+                                                            search
+                                                            maxHeight={300}
+                                                            labelField="label"
+                                                            valueField="value2"
+                                                            placeholder={!isFocus2 ? 'Select item' : '...'}
+                                                            searchPlaceholder="Search..."
+                                                            value={value2}
+                                                            onFocus={() => setIsFocus2(true)}
+                                                            onBlur={() => setIsFocus2(false)}
+                                                            onChange={item => {
+                                                                setValue2(item.value2);
+                                                                setIsFocus2(false);
+                                                            }}
+                                                            renderLeftIcon={() => (
+                                                                <AntDesign
+                                                                    style={styles.icon}
+                                                                    color={isFocus2 ? 'blue' : 'black'}
+                                                                    name="Safety"
+                                                                    size={20} />
+                                                            )} />
+                                                    </View>
+                                                </View>
+
+                                            </View> : null}
+
+                                            <View style={{ flex: 1 }}>
                                                 <TouchableOpacity style={{
-                                                    padding: 8,
+                                                    marginTop: 10, padding: 5,
                                                     borderRadius: 5, backgroundColor: themeColors.bg1,
                                                     shadowColor: themeColors.bg1,
                                                     shadowOffset: {
@@ -400,334 +487,265 @@ const ViewCom = ({ navigation }) => {
                                                     shadowOpacity: 0.8,
                                                     shadowRadius: 16.00,
                                                     elevation: 24,
-                                                    paddingLeft: 60, paddingRight: 60,
-                                                    top: 45
-                                                }} onPress={showDatePicker}>
+                                                    top: 10,
+                                                }} onPress={() => setShouldShow3(!shouldShow3)}>
                                                     <Text style={{
                                                         alignSelf: "center", color: 'white', fontWeight: '700'
-                                                    }}>Date</Text>
+                                                    }}>Add Picture</Text>
                                                 </TouchableOpacity>
-                                                <Text style={{ fontSize: 24, fontWeight: 'bold', bottom: 40 }}>
-                                                    {selectedDate ? selectedDate.toLocaleDateString() : 'No date selected'}
-                                                </Text>
-                                                <Text style={{ fontWeight: '500', bottom: responsiveHeight(7), right: responsiveWidth(35), }}>Date:</Text>
-                                                <FontAwesome5 name="table" size={25} color={themeColors.bg1} style={{ left: responsiveWidth(12), opacity: 0.5, bottom: 10, position: 'absolute' }} />
-                                                <DateTimePickerModal
-                                                    isVisible={isDatePickerVisible}
-                                                    mode='date'
-                                                    onConfirm={handleConfirm}
-                                                    onCancel={hideDatePicker}
-                                                    date={selectedDate} />
+
+                                                {shouldShow3 ?
+                                                    <View style={{ marginTop: 10, marginBottom: responsiveHeight(-17) }}>
+
+                                                        <View style={{ bottom: responsiveHeight(21), right: responsiveWidth(17) }}>
+                                                            <View style={{ alignItems: 'center', justifyContent: 'center', top: responsiveHeight(25), left: responsiveWidth(15) }}>
+                                                                <Text style={{ fontWeight: '700', fontSize: 16, color: 'gray', right: responsiveWidth(21), top: 5 }}>Report 1:</Text>
+                                                                <FontAwesome5 name="chart-pie" size={22} color="gray" style={{ top: 10, right: 75 }} />
+                                                                <TouchableOpacity style={{
+                                                                    marginTop: 10, padding: 5,
+                                                                    borderRadius: 5,
+                                                                    marginLeft: 70, marginRight: 70,
+                                                                    left: 10,
+                                                                    bottom: responsiveHeight(4),
+                                                                    borderWidth: 2,
+                                                                    paddingLeft: 20,
+                                                                    paddingRight: 20,
+                                                                    borderColor: 'orange'
+                                                                }} onPress={() => pickImage()}>
+                                                                    <FontAwesome5 name="images" size={21} color="orange" style={{ alignSelf: 'center' }} />
+                                                                </TouchableOpacity>
+
+                                                                <TouchableOpacity style={{
+                                                                    marginTop: 10, padding: 5,
+                                                                    borderRadius: 5,
+                                                                    marginLeft: 70, marginRight: 70,
+                                                                    borderWidth: 2,
+                                                                    left: 100,
+                                                                    bottom: 77,
+                                                                    paddingLeft: 20,
+                                                                    paddingRight: 20,
+                                                                    borderColor: 'blue'
+                                                                }} onPress={() => navigation.navigate('Media')}>
+                                                                    <FontAwesome5 name="camera" size={22} color="lightblue" style={{ alignSelf: 'center', bottom: 1 }} />
+                                                                </TouchableOpacity>
+                                                                <View style={{ bottom: 60, right: 25 }}>
+                                                                    {image && <Image source={{ uri: image }} style={{ width: responsiveWidth(85), height: responsiveHeight(20), left: responsiveWidth(10), borderRadius: 5 }} />}
+                                                                </View>
+
+                                                            </View>
+
+                                                        </View>
+
+                                                        <View style={{ bottom: responsiveHeight(28), right: responsiveWidth(17) }}>
+                                                            <View style={{ alignItems: 'center', justifyContent: 'center', top: responsiveHeight(25), left: responsiveWidth(15) }}>
+                                                                <Text style={{ fontWeight: '700', fontSize: 16, color: 'gray', right: responsiveWidth(21), top: 5 }}>Report 2:</Text>
+                                                                <FontAwesome5 name="chart-pie" size={22} color="gray" style={{ top: 10, right: 75 }} />
+                                                                <TouchableOpacity style={{
+                                                                    marginTop: 10, padding: 5,
+                                                                    borderRadius: 5,
+                                                                    marginLeft: 70, marginRight: 70,
+                                                                    left: 10,
+                                                                    bottom: responsiveHeight(4),
+                                                                    borderWidth: 2,
+                                                                    paddingLeft: 20,
+                                                                    paddingRight: 20,
+                                                                    borderColor: 'orange'
+                                                                }} onPress={() => pickImage1()}>
+                                                                    <FontAwesome5 name="images" size={21} color="orange" style={{ alignSelf: 'center' }} />
+                                                                </TouchableOpacity>
+
+                                                                <TouchableOpacity style={{
+                                                                    marginTop: 10, padding: 5,
+                                                                    borderRadius: 5,
+                                                                    marginLeft: 70, marginRight: 70,
+                                                                    borderWidth: 2,
+                                                                    left: 100,
+                                                                    bottom: 77,
+                                                                    paddingLeft: 20,
+                                                                    paddingRight: 20,
+                                                                    borderColor: 'blue'
+                                                                }} onPress={() => navigation.navigate('Media')}>
+                                                                    <FontAwesome5 name="camera" size={22} color="lightblue" style={{ alignSelf: 'center', bottom: 1 }} />
+                                                                </TouchableOpacity>
+                                                                <View style={{ bottom: 60, right: 25 }}>
+                                                                    {image1 && <Image source={{ uri: image1 }} style={{ width: responsiveWidth(85), height: responsiveHeight(20), left: responsiveWidth(10), borderRadius: 5 }} />}
+                                                                </View>
+
+                                                            </View>
+
+                                                        </View>
+
+
+                                                        <View style={{ bottom: responsiveHeight(35), right: responsiveWidth(17) }}>
+                                                            <View style={{ alignItems: 'center', justifyContent: 'center', top: responsiveHeight(25), left: responsiveWidth(15) }}>
+                                                                <Text style={{ fontWeight: '700', fontSize: 16, color: 'gray', right: responsiveWidth(21), top: 5, }}>Report 3:</Text>
+                                                                <FontAwesome5 name="chart-pie" size={22} color="gray" style={{ top: 10, right: 75 }} />
+                                                                <TouchableOpacity style={{
+                                                                    marginTop: 10, padding: 5,
+                                                                    borderRadius: 5,
+                                                                    marginLeft: 70, marginRight: 70,
+                                                                    left: 10,
+                                                                    bottom: responsiveHeight(4),
+                                                                    borderWidth: 2,
+                                                                    paddingLeft: 20,
+                                                                    paddingRight: 20,
+                                                                    borderColor: 'orange'
+                                                                }} onPress={() => pickImage2()}>
+                                                                    <FontAwesome5 name="images" size={21} color="orange" style={{ alignSelf: 'center' }} />
+                                                                </TouchableOpacity>
+
+                                                                <TouchableOpacity style={{
+                                                                    marginTop: 10, padding: 5,
+                                                                    borderRadius: 5,
+                                                                    marginLeft: 70, marginRight: 70,
+                                                                    borderWidth: 2,
+                                                                    left: 100,
+                                                                    bottom: 77,
+                                                                    paddingLeft: 20,
+                                                                    paddingRight: 20,
+                                                                    borderColor: 'blue'
+                                                                }} onPress={() => navigation.navigate('Media')}>
+                                                                    <FontAwesome5 name="camera" size={22} color="lightblue" style={{ alignSelf: 'center', bottom: 1 }} />
+                                                                </TouchableOpacity>
+                                                                <View style={{ bottom: 60, right: 25 }}>
+                                                                    {image2 && <Image source={{ uri: image2 }} style={{ width: responsiveWidth(85), height: responsiveHeight(20), left: responsiveWidth(10), borderRadius: 5 }} />}
+                                                                </View>
+
+                                                            </View>
+
+                                                        </View>
+
+
+                                                        <View style={{ bottom: responsiveHeight(15), left: 15 }}>
+
+                                                            <Text style={{ fontWeight: '500', fontSize: 16 }}> Note:</Text>
+                                                            <TextInput
+                                                                placeholder='Note'
+                                                                style={{
+                                                                    textAlignVertical: 'top', backgroundColor: '#fff',
+                                                                    marginLeft: 50, marginRight: 50,
+                                                                    borderBottomWidth: 1, bottom: 21, paddingLeft: 4
+                                                                }} />
+                                                        </View>
+                                                    </View>
+                                                    : null}
+                                            </View>
+                                        </View>
+                                        : null}
+                                </View>
+
+                                <TouchableOpacity style={{
+                                    marginTop: 10, padding: 5,
+                                    borderRadius: 5, backgroundColor: themeColors.bg,
+                                    shadowColor: themeColors.bg,
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 50,
+                                    },
+                                    shadowOpacity: 0.8,
+                                    shadowRadius: 16.00,
+                                    elevation: 24,
+                                }} onPress={() => setShouldShow(!shouldShow)}>
+                                    <Text style={{
+                                        alignSelf: "center", color: 'white', fontWeight: '700'
+                                    }}>RE-ASSIGN COMPLAINANT</Text>
+                                </TouchableOpacity>
+
+
+
+
+                                <View style={{ marginTop: 10, marginBottom: 50 }}>
+                                    {shouldShow ?
+                                        <View style={{}}>
+
+                                            <Text style={{ fontWeight: '500', fontSize: 17 }}>RE-ASSIGN COMPLAINT:</Text>
+
+                                            <View style={styles.container}>
+                                                {renderLabel3()}
+                                                <Dropdown
+                                                    style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                                                    placeholderStyle={styles.placeholderStyle}
+                                                    selectedTextStyle={styles.selectedTextStyle}
+                                                    inputSearchStyle={styles.inputSearchStyle}
+                                                    iconStyle={styles.iconStyle}
+                                                    data={data}
+                                                    search
+                                                    maxHeight={300}
+                                                    labelField="label"
+                                                    valueField="value"
+                                                    placeholder={!isFocus3 ? 'Select item' : '...'}
+                                                    searchPlaceholder="Search..."
+                                                    value={value}
+                                                    onFocus={() => setIsFocus3(true)}
+                                                    onBlur={() => setIsFocus3(false)}
+                                                    onChange={item => {
+                                                        setValue3(item.value);
+                                                        setIsFocus3(false);
+                                                    }}
+                                                    renderLeftIcon={() => (
+                                                        <AntDesign
+                                                            style={styles.icon}
+                                                            color={isFocus ? 'blue' : 'black'}
+                                                            name="Safety"
+                                                            size={20} />
+                                                    )} />
                                             </View>
 
-                                            <View style={{ alignContent: 'center', justifyContent: 'center', top: 35 }}>
-                                                <Text style={{ fontWeight: '500', fontSize: 17 }}>Time:</Text>
-                                                <View style={styles.container}>
-                                                    {renderLabel2()}
-                                                    <Dropdown
-                                                        style={[styles.dropdown, isFocus2 && { borderColor: 'blue' }]}
-                                                        placeholderStyle={styles.placeholderStyle}
-                                                        selectedTextStyle={styles.selectedTextStyle}
-                                                        inputSearchStyle={styles.inputSearchStyle}
-                                                        iconStyle={styles.iconStyle}
-                                                        data={data2}
-                                                        search
-                                                        maxHeight={300}
-                                                        labelField="label"
-                                                        valueField="value2"
-                                                        placeholder={!isFocus2 ? 'Select item' : '...'}
-                                                        searchPlaceholder="Search..."
-                                                        value={value2}
-                                                        onFocus={() => setIsFocus2(true)}
-                                                        onBlur={() => setIsFocus2(false)}
-                                                        onChange={item => {
-                                                            setValue2(item.value2);
-                                                            setIsFocus2(false);
-                                                        } }
-                                                        renderLeftIcon={() => (
-                                                            <AntDesign
-                                                                style={styles.icon}
-                                                                color={isFocus2 ? 'blue' : 'black'}
-                                                                name="Safety"
-                                                                size={20} />
-                                                        )} />
-                                                </View>
+                                            <Text style={{ fontWeight: '500', fontSize: 17 }}>Ready Response:</Text>
+                                            <View style={styles.container}>
+                                                {renderLabel4()}
+                                                <Dropdown
+                                                    style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                                                    placeholderStyle={styles.placeholderStyle}
+                                                    selectedTextStyle={styles.selectedTextStyle}
+                                                    inputSearchStyle={styles.inputSearchStyle}
+                                                    iconStyle={styles.iconStyle}
+                                                    data={data}
+                                                    search
+                                                    maxHeight={300}
+                                                    labelField="label"
+                                                    valueField="value"
+                                                    placeholder={!isFocus4 ? 'Select item' : '...'}
+                                                    searchPlaceholder="Search..."
+                                                    value={value}
+                                                    onFocus={() => setIsFocus4(true)}
+                                                    onBlur={() => setIsFocus4(false)}
+                                                    onChange={item => {
+                                                        setValue4(item.value);
+                                                        setIsFocus4(false);
+                                                    }}
+                                                    renderLeftIcon={() => (
+                                                        <AntDesign
+                                                            style={styles.icon}
+                                                            color={isFocus ? 'blue' : 'black'}
+                                                            name="Safety"
+                                                            size={20} />
+                                                    )} />
                                             </View>
 
-                                        </View> : null}
-
-                                        <View style={{ flex: 1 }}>
-                                            <TouchableOpacity style={{
-                                                marginTop: 10, padding: 5,
-                                                borderRadius: 5, backgroundColor: themeColors.bg1,
-                                                shadowColor: themeColors.bg1,
-                                                shadowOffset: {
-                                                    width: 0,
-                                                    height: 50,
-                                                },
-                                                shadowOpacity: 0.8,
-                                                shadowRadius: 16.00,
-                                                elevation: 24,
-                                                top: 10,
-                                            }} onPress={() => setShouldShow3(!shouldShow3)}>
-                                                <Text style={{
-                                                    alignSelf: "center", color: 'white', fontWeight: '700'
-                                                }}>Add Picture</Text>
-                                            </TouchableOpacity>
-
-                                            {shouldShow3 ?
-                                                <View style={{ marginTop: 10, marginBottom: responsiveHeight(-17) }}>
-
-                                                    <View style={{ bottom: responsiveHeight(21), right: responsiveWidth(17) }}>
-                                                        <View style={{ alignItems: 'center', justifyContent: 'center', top: responsiveHeight(25), left: responsiveWidth(15) }}>
-                                                            <Text style={{ fontWeight: '700', fontSize: 16, color: 'gray', right: responsiveWidth(21), top: 5 }}>Report 1:</Text>
-                                                            <FontAwesome5 name="chart-pie" size={22} color="gray" style={{ top: 10, right: 75 }} />
-                                                            <TouchableOpacity style={{
-                                                                marginTop: 10, padding: 5,
-                                                                borderRadius: 5,
-                                                                marginLeft: 70, marginRight: 70,
-                                                                left: 10,
-                                                                bottom: responsiveHeight(4),
-                                                                borderWidth: 2,
-                                                                paddingLeft: 20,
-                                                                paddingRight: 20,
-                                                                borderColor: 'orange'
-                                                            }} onPress={() => pickImage()}>
-                                                                <FontAwesome5 name="images" size={21} color="orange" style={{ alignSelf: 'center' }} />
-                                                            </TouchableOpacity>
-
-                                                            <TouchableOpacity style={{
-                                                                marginTop: 10, padding: 5,
-                                                                borderRadius: 5,
-                                                                marginLeft: 70, marginRight: 70,
-                                                                borderWidth: 2,
-                                                                left: 100,
-                                                                bottom: 77,
-                                                                paddingLeft: 20,
-                                                                paddingRight: 20,
-                                                                borderColor: 'blue'
-                                                            }} onPress={() => navigation.navigate('Media')}>
-                                                                <FontAwesome5 name="camera" size={22} color="lightblue" style={{ alignSelf: 'center', bottom: 1 }} />
-                                                            </TouchableOpacity>
-                                                            <View style={{ bottom: 60, right: 25 }}>
-                                                                {image && <Image source={{ uri: image }} style={{ width: responsiveWidth(85), height: responsiveHeight(20), left: responsiveWidth(10), borderRadius: 5 }} />}
-                                                            </View>
-
-                                                        </View>
-
-                                                    </View>
-
-                                                    <View style={{ bottom: responsiveHeight(28), right: responsiveWidth(17) }}>
-                                                        <View style={{ alignItems: 'center', justifyContent: 'center', top: responsiveHeight(25), left: responsiveWidth(15) }}>
-                                                            <Text style={{ fontWeight: '700', fontSize: 16, color: 'gray', right: responsiveWidth(21), top: 5 }}>Report 2:</Text>
-                                                            <FontAwesome5 name="chart-pie" size={22} color="gray" style={{ top: 10, right: 75 }} />
-                                                            <TouchableOpacity style={{
-                                                                marginTop: 10, padding: 5,
-                                                                borderRadius: 5,
-                                                                marginLeft: 70, marginRight: 70,
-                                                                left: 10,
-                                                                bottom: responsiveHeight(4),
-                                                                borderWidth: 2,
-                                                                paddingLeft: 20,
-                                                                paddingRight: 20,
-                                                                borderColor: 'orange'
-                                                            }} onPress={() => pickImage1()}>
-                                                                <FontAwesome5 name="images" size={21} color="orange" style={{ alignSelf: 'center' }} />
-                                                            </TouchableOpacity>
-
-                                                            <TouchableOpacity style={{
-                                                                marginTop: 10, padding: 5,
-                                                                borderRadius: 5,
-                                                                marginLeft: 70, marginRight: 70,
-                                                                borderWidth: 2,
-                                                                left: 100,
-                                                                bottom: 77,
-                                                                paddingLeft: 20,
-                                                                paddingRight: 20,
-                                                                borderColor: 'blue'
-                                                            }} onPress={() => navigation.navigate('Media')}>
-                                                                <FontAwesome5 name="camera" size={22} color="lightblue" style={{ alignSelf: 'center', bottom: 1 }} />
-                                                            </TouchableOpacity>
-                                                            <View style={{ bottom: 60, right: 25 }}>
-                                                                {image1 && <Image source={{ uri: image1 }} style={{ width: responsiveWidth(85), height: responsiveHeight(20), left: responsiveWidth(10), borderRadius: 5 }} />}
-                                                            </View>
-
-                                                        </View>
-
-                                                    </View>
-
-
-                                                    <View style={{ bottom: responsiveHeight(35), right: responsiveWidth(17) }}>
-                                                        <View style={{ alignItems: 'center', justifyContent: 'center', top: responsiveHeight(25), left: responsiveWidth(15) }}>
-                                                            <Text style={{ fontWeight: '700', fontSize: 16, color: 'gray', right: responsiveWidth(21), top: 5, }}>Report 3:</Text>
-                                                            <FontAwesome5 name="chart-pie" size={22} color="gray" style={{ top: 10, right: 75 }} />
-                                                            <TouchableOpacity style={{
-                                                                marginTop: 10, padding: 5,
-                                                                borderRadius: 5,
-                                                                marginLeft: 70, marginRight: 70,
-                                                                left: 10,
-                                                                bottom: responsiveHeight(4),
-                                                                borderWidth: 2,
-                                                                paddingLeft: 20,
-                                                                paddingRight: 20,
-                                                                borderColor: 'orange'
-                                                            }} onPress={() => pickImage2()}>
-                                                                <FontAwesome5 name="images" size={21} color="orange" style={{ alignSelf: 'center' }} />
-                                                            </TouchableOpacity>
-
-                                                            <TouchableOpacity style={{
-                                                                marginTop: 10, padding: 5,
-                                                                borderRadius: 5,
-                                                                marginLeft: 70, marginRight: 70,
-                                                                borderWidth: 2,
-                                                                left: 100,
-                                                                bottom: 77,
-                                                                paddingLeft: 20,
-                                                                paddingRight: 20,
-                                                                borderColor: 'blue'
-                                                            }} onPress={() => navigation.navigate('Media')}>
-                                                                <FontAwesome5 name="camera" size={22} color="lightblue" style={{ alignSelf: 'center', bottom: 1 }} />
-                                                            </TouchableOpacity>
-                                                            <View style={{ bottom: 60, right: 25 }}>
-                                                                {image2 && <Image source={{ uri: image2 }} style={{ width: responsiveWidth(85), height: responsiveHeight(20), left: responsiveWidth(10), borderRadius: 5 }} />}
-                                                            </View>
-
-                                                        </View>
-
-                                                    </View>
-
-
-                                                    <View style={{ bottom: responsiveHeight(15), left: 15 }}>
-
-                                                        <Text style={{ fontWeight: '500', fontSize: 16 }}> Note:</Text>
-                                                        <TextInput
-                                                            placeholder='Note'
-                                                            style={{
-                                                                textAlignVertical: 'top', backgroundColor: '#fff',
-                                                                marginLeft: 50, marginRight: 50,
-                                                                borderBottomWidth: 1, bottom: 21, paddingLeft: 4
-                                                            }} />
-                                                    </View>
+                                            <View style={{ top: responsiveHeight(3), left: 12 }}>
+                                                <Text style={{ fontWeight: '500', fontSize: 17 }}> Note:</Text>
+                                                <TextInput
+                                                    placeholder='Note'
+                                                    style={{
+                                                        textAlignVertical: 'top', backgroundColor: '#fff',
+                                                        marginLeft: 50, marginRight: 50,
+                                                        borderBottomWidth: 1, bottom: 21, paddingLeft: 4
+                                                    }} />
+                                            </View>
 
 
 
 
-
-
-
-
-
-
-                                                </View>
-                                                : null}
                                         </View>
 
-
-
-
-
-
-                                        {/*   <View style={{ flex: 1 }}>
-
-
-                                <View style={{ position: 'absolute', bottom: 10 }}>
-
-                                    <View style={{ alignItems: 'center', justifyContent: 'center', top: responsiveHeight(19), left: responsiveWidth(15) }}>
-                                        <Text style={{ fontWeight: '700', fontSize: 14, color: 'black', right: responsiveWidth(25), top: 5 }}>Report 1:</Text>
-                                        <TouchableOpacity style={{
-                                            marginTop: 10, padding: 5,
-                                            borderRadius: 5,
-                                            marginLeft: 70, marginRight: 70,
-                                            left: 10,
-                                            bottom: responsiveHeight(4),
-                                            borderWidth: 2,
-                                            paddingLeft: 20,
-                                            paddingRight: 20
-
-                                        }} onPress={() => pickImage()}>
-                                            <FontAwesome5 name="images" size={21} color="black" style={{ opacity: 0.3, alignSelf: 'center' }} />
-                                        </TouchableOpacity>
-
-                                        <TouchableOpacity style={{
-                                            marginTop: 10, padding: 5,
-                                            borderRadius: 5,
-                                            marginLeft: 70, marginRight: 70,
-                                            borderWidth: 2,
-                                            left: 100,
-                                            bottom: responsiveHeight(10.5),
-                                            paddingLeft: 20,
-                                            paddingRight: 20
-
-                                        }} onPress={() => navigation.navigate('Data')}>
-                                            <FontAwesome5 name="camera" size={22} color="black" style={{ opacity: 0.3, alignSelf: 'center', bottom: 1 }} />
-                                        </TouchableOpacity>
-                                        <View>
-                                            {image && <Image source={{ uri: image }} style={{ width: 200, height: 150, position: 'absolute', alignSelf: 'center', bottom: responsiveHeight(1.5) }} />}
-                                        </View>
-
-
-
-                                    </View>
-
-
-                                </View >
-
-
-                                    </View>*/}
-
-                                    </View>
-                                    : null}
+                                        : null}
+                                </View>
                             </View>
 
-                            <TouchableOpacity style={{
-                                marginTop: 10, padding: 5,
-                                borderRadius: 5, backgroundColor: themeColors.bg,
-                                shadowColor: themeColors.bg,
-                                shadowOffset: {
-                                    width: 0,
-                                    height: 50,
-                                },
-                                shadowOpacity: 0.8,
-                                shadowRadius: 16.00,
-                                elevation: 24,
-                            }} onPress={() => setShouldShow(!shouldShow)}>
-                                <Text style={{
-                                    alignSelf: "center", color: 'white', fontWeight: '700'
-                                }}>RE-ASSIGN COMPLAINANT</Text>
-                            </TouchableOpacity>
-
-
-
-
-                            <View style={{ marginTop: 10 }}>
-                                {shouldShow ?
-                                    <FlatList
-                                        style={{ height: 665 }}
-
-
-                                        renderItem={({ }) => (
-                                            <Pressable style={{
-                                                backgroundColor: '#e5e5e5', padding: 15, borderRadius: 15,
-                                                margin: 5, marginHorizontal: 10,
-                                            }}>
-                                                <View style={{}}>
-                                                    <Text style={{ fontWeight: 'bold', top: 6 }}></Text>
-                                                    <Text style={{ fontWeight: 'bold', left: 250 }}></Text>
-                                                    <Text style={{ fontWeight: 'bold', bottom: 10 }}></Text>
-                                                    <Text style={{ fontWeight: 'bold', bottom: 5 }}></Text>
-                                                    <Text style={{ fontWeight: 'bold', bottom: 4 }}></Text>
-                                                    <Text style={{ fontWeight: 'bold' }}></Text>
-                                                    <Text style={{ fontWeight: 'bold', top: 5 }}></Text>
-
-                                                </View>
-                                            </Pressable>)} /> : null}
-                            </View>
                         </View>
-
                     </View>
-
                 </Pressable>)} />
-
 
 
     )
@@ -767,7 +785,7 @@ const styles = StyleSheet.create({
         aspectRatio: 1
     }, container: {
 
-
+        padding: 8
 
     },
     dropdown: {

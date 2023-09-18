@@ -3,20 +3,23 @@ import {
   Alert,
   Animated,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
+
 } from 'react-native';
 import { CurvedBottomBarExpo } from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/FontAwesome5';
-import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Screen1 = () => {
-  return <View style={styles.screen1} />;
-};
+import Search from './Search';
+import SearchList from './SearchList';
+import ViewCom from './ViewCom';
+import DataList1 from './DataList1';
+import { themeColors } from './Theme/ThemeColor';
+const stack = createNativeStackNavigator();
 
-const Screen2 = () => {
-  return <View style={styles.screen2} />;
-};
+
 const Screen3 = () => {
   return <View style={styles.Screen3} />;
 };
@@ -30,16 +33,16 @@ export default function MyTab() {
     let icon = '';
 
     switch (routeName) {
-      case 'title1':
+      case 'Home':
         icon = 'home';
         break;
-      case 'title2':
+      case 'Search':
         icon = 'search';
         break;
-      case 'title3':
+      case 'Alart':
         icon = 'bell';
         break;
-      case 'title4':
+      case 'Help':
         icon = 'hands-helping';
         break;
     }
@@ -48,8 +51,10 @@ export default function MyTab() {
       <Ionicons
         name={icon}
         size={25}
-        color={routeName === selectedTab ? 'blue' : 'gray'}
+        color={routeName === selectedTab ? themeColors.bg : 'gray'}
+        
       />
+
     );
   };
   const renderTabBar = ({ routeName, selectedTab, navigate }) => {
@@ -64,14 +69,15 @@ export default function MyTab() {
   };
 
   return (
-    <NavigationContainer>
+    
       <CurvedBottomBarExpo.Navigator
         type="DOWN"
         style={styles.bottomBar}
         shadowStyle={styles.shawdow}
         height={55}
+        
         circleWidth={50}
-        bgColor="white"
+        bgColor={themeColors.bg1}
         initialRouteName="title1"
         borderTopLeftRight
         renderCircle={({ selectedTab, navigate }) => (
@@ -82,33 +88,40 @@ export default function MyTab() {
             >
               <Ionicons name={'plus'} color="gray" size={25} />
             </TouchableOpacity>
+
           </Animated.View>
         )}
         tabBar={renderTabBar}
       >
         <CurvedBottomBarExpo.Screen
-          name="title1"
+          name="Home"
           position="LEFT"
-          component={() => <Screen1 />}
+          component={DataList1}
         />
+
         <CurvedBottomBarExpo.Screen
-          name="title2"
-          component={() => <Screen2 />}
+          name="Search"
+          component={Search}
           position="LEFT"
         />
+
         <CurvedBottomBarExpo.Screen
-          name="title3"
+          name="Alart"
           component={() => <Screen3 />}
           position="RIGHT"
         />
+
         <CurvedBottomBarExpo.Screen
-          name="title4"
+          name="Help"
           position="RIGHT"
           component={() => <Screen4 />}
         />
+        <stack.Screen name='SearchList' options={{ headerShown: true }} component={SearchList} />
+        <stack.Screen name='ViewCom' options={{ headerShown: true }} component={ViewCom} />
 
       </CurvedBottomBarExpo.Navigator>
-    </NavigationContainer>
+
+  
   );
 }
 
