@@ -62,7 +62,7 @@ const ViewCom = ({ navigation }) => {
     const [image, setImage] = useState(null);
     const [image1, setImage1] = useState(null);
     const [image2, setImage2] = useState(null);
-    
+
     const [shouldShow, setShouldShow] = useState();
     const [shouldShow1, setShouldShow1] = useState();
     const [shouldShow2, setShouldShow2] = useState();
@@ -214,7 +214,7 @@ const ViewCom = ({ navigation }) => {
     return (
         <FlatList
 
-            style={{marginBottom:40}}
+            style={{ marginBottom: 40 }}
             data={Local_data}
             numColumns={1}
             renderItem={({ item }) => (

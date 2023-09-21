@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, SafeAreaView, StyleSheet, Text, Platform, UIManager, Image, Button, TouchableOpacity, TextInput } from 'react-native';
 import { AccordionList } from 'react-native-accordion-list-view';
-import Modal from "react-native-modal";
 import { themeColors } from './Theme/ThemeColor';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { LinearGradient } from 'expo-linear-gradient';
-import { responsiveFontSize, responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
-
 
 const DataList1 = () => {
     const data = [
@@ -101,8 +96,8 @@ const DataList1 = () => {
 
                         <TouchableOpacity style={{
                             marginTop: 10, padding: 5,
-                            borderRadius: 5, backgroundColor: "#FC345C",
-                            shadowColor: "#FC345C",
+                            borderRadius: 5, backgroundColor:themeColors.bg,
+                            shadowColor:themeColors.bg,
                             shadowOffset: {
                                 width: 0,
                                 height: 50,

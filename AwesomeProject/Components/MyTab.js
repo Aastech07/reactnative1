@@ -51,7 +51,7 @@ export default function MyTab() {
       <Ionicons
         name={icon}
         size={25}
-        color={routeName === selectedTab ? themeColors.bg : 'gray'}
+        color={routeName === selectedTab ? 'red' : 'gray'}
         
       />
 
@@ -77,7 +77,7 @@ export default function MyTab() {
         height={55}
         
         circleWidth={50}
-        bgColor={themeColors.bg1}
+        bgColor="navy"
         initialRouteName="title1"
         borderTopLeftRight
         renderCircle={({ selectedTab, navigate }) => (

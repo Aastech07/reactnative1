@@ -2,6 +2,12 @@ import React from 'react'
 import { View, FlatList, Pressable, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { themeColors } from './Theme/ThemeColor';
 import { responsiveFontSize, responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withTiming,
+    withRepeat,
+} from 'react-native-reanimated';
 const SearchList = ({ navigation }) => {
 
     const Local_data = [
@@ -26,7 +32,7 @@ const SearchList = ({ navigation }) => {
             Name: "Parag joshi",
             Mobile_No: "9892858655",
             Available_Time: "10:00am to 6:00pm"
-        },{
+        }, {
             id: "2",
             Data: "Leakage in Chilren bathroom",
             SR_No: "89748",
@@ -36,7 +42,7 @@ const SearchList = ({ navigation }) => {
             Name: "Parag joshi",
             Mobile_No: "9892858655",
             Available_Time: "10:00am to 6:00pm"
-        },{
+        }, {
             id: "3",
             Data: "Leakage in Chilren bathroom",
             SR_No: "89748",
@@ -48,14 +54,24 @@ const SearchList = ({ navigation }) => {
             Available_Time: "10:00am to 6:00pm"
         },
     ]
+    const offset = useSharedValue(200);
 
+    const animatedStyles = useAnimatedStyle(() => ({
+        transform: [{ translateX: offset.value }],
+    }));
+
+    React.useEffect(() => {
+        offset.value = withRepeat(
+            withTiming(-offset.value, { duration: 1500 }),
+            -1,
+            true
+        );
+    }, []);
 
     return (
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-
             <FlatList
-           
-                style={{ height:responsiveHeight(90), top: 10 }}
+                style={{ height: responsiveHeight(90), top: 10, }}
                 data={Local_data}
                 numColumns={1}
                 renderItem={({ item }) => (
@@ -64,18 +80,18 @@ const SearchList = ({ navigation }) => {
                             <Text style={{ fontWeight: 'bold', bottom: 5, fontSize: responsiveFontSize(2) }}>{item.Data}</Text>
                             <Text style={{ fontWeight: '500', fontSize: responsiveFontSize(1.9) }}>SR_No:{item.SR_No}</Text>
                             <Text style={{ fontWeight: '500', fontSize: responsiveFontSize(1.9) }}>Project:{item.Project}</Text>
-                            <Text style={{ fontWeight: '500',fontSize: responsiveFontSize(1.9) }}>Date : {item.Department}</Text>
-                            <Text style={{ fontWeight: '500', bottom: 2,fontSize: responsiveFontSize(1.9) }}>Location :{item.Locations}</Text>
-                            <Text style={{ fontWeight: '500', bottom: 2,fontSize: responsiveFontSize(1.9) }}>Name :{item.Name}</Text>
-                            <Text style={{ fontWeight: '500', bottom: 2,fontSize: responsiveFontSize(1.9) }}>Mobile_No :{item.Mobile_No}</Text>
-                            <Text style={{ fontWeight: '500', bottom: 2,fontSize: responsiveFontSize(1.9) }}>Available_Time :{item.Available_Time}</Text>
+                            <Text style={{ fontWeight: '500', fontSize: responsiveFontSize(1.9) }}>Date : {item.Department}</Text>
+                            <Text style={{ fontWeight: '500', bottom: 2, fontSize: responsiveFontSize(1.9) }}>Location :{item.Locations}</Text>
+                            <Text style={{ fontWeight: '500', bottom: 2, fontSize: responsiveFontSize(1.9) }}>Name :{item.Name}</Text>
+                            <Text style={{ fontWeight: '500', bottom: 2, fontSize: responsiveFontSize(1.9) }}>Mobile_No :{item.Mobile_No}</Text>
+                            <Text style={{ fontWeight: '500', bottom: 2, fontSize: responsiveFontSize(1.9) }}>Available_Time :{item.Available_Time}</Text>
 
                             <TouchableOpacity style={{
                                 padding: 5,
                                 bottom: 150,
                                 borderRadius: 5,
-                                backgroundColor:themeColors.bg,
-                                shadowColor:themeColors.bg,
+                                backgroundColor: themeColors.bg,
+                                shadowColor: themeColors.bg,
                                 shadowOffset: {
                                     width: 0,
                                     height: 50,
@@ -109,11 +125,10 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#e5e5e5',
         padding: 15,
-        borderRadius: 15,
+        borderRadius: 8,
         margin: 5,
         marginHorizontal: 20,
-        paddingLeft: 50,
-        paddingRight: 50,
+       
         shadowColor: "black",
         shadowOffset: {
             width: 0,
