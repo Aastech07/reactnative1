@@ -9,9 +9,6 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { Switch } from 'react-native-paper';
 
-import { ThemedButton } from 'react-native-really-awesome-button';
-
-
 
 
 const data = [

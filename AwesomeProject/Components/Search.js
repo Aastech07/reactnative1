@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, FlatList, Pressable, Button } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, useColorScheme, TextInput, FlatList, Pressable, Button } from 'react-native';
 import { SelectCountry } from 'react-native-element-dropdown';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { responsiveFontSize, responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import { themeColors } from './Theme/ThemeColor';
-import { ScrollView } from 'react-native-virtualized-view';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  withRepeat,
-} from 'react-native-reanimated';
+
 const Local_data = [
   {
     id: "0",
@@ -114,7 +108,7 @@ const Search = ({ navigation }) => {
   const [keyword, setKeyword] = useState("");
   const [pendingcomp, setPendingComp] = useState("");
   const [searchText, setSearchText] = useState('');
-  const [dataArray, setDataArray] = useState(Local_data); 
+  const [dataArray, setDataArray] = useState(Local_data);
   const [filteredData, setFilteredData] = useState([]);
   const [showData, setShowData] = useState(false);
 
@@ -127,25 +121,15 @@ const Search = ({ navigation }) => {
     setFilteredData(newFilteredData);
     setShowData(true);
   };
-  const offset = useSharedValue(100);
 
-    const animatedStyles = useAnimatedStyle(() => ({
-        transform: [{ translateY: offset.value }],
-    }));
+  
 
-    React.useEffect(() => {
-        offset.value = withRepeat(
-            withTiming(-offset.value, { duration: 4000 }),
-            +1,
-            true
-        );
-    }, []);
   return (
     <ScrollView style={{}}>
       <View style={{ justifyContent: 'center', alignItems: 'center', }}>
         <View style={{}}>
           <View style={{ bottom: 50 }}>
-            <Text style={{ fontWeight: '500', fontSize: 17, right: 5, top: 75 }}>Project:-</Text>
+            <Text style={{ fontWeight: '500', fontSize: 16, right: 5, top: 75 }}>Project:-</Text>
             <View style={{ bottom: 10, left: 10 }}>
               <FontAwesome5 name="project-diagram" size={20} color={themeColors.bg} style={{ right: 55, top: 65 }} />
               <SelectCountry
@@ -168,7 +152,7 @@ const Search = ({ navigation }) => {
             </View>
 
             <View style={{ bottom: 65, }}>
-              <Text style={{ fontWeight: '500', top: 85, fontSize: 17, right: 10 }}>Building:-</Text>
+              <Text style={{ fontWeight: '500', top: 85, fontSize: 16, right: 10 }}>Building:-</Text>
               <FontAwesome5 name="building" size={24} color={themeColors.bg} style={{ right: 45, top: 65, }} />
               <View style={{ left: 10 }}>
                 <SelectCountry
@@ -193,7 +177,7 @@ const Search = ({ navigation }) => {
 
 
             <View style={{ bottom: 120 }}>
-              <Text style={{ fontWeight: '500', top: 85, fontSize: 17, right: 5 }}>Flat NO:-</Text>
+              <Text style={{ fontWeight: '500', top: 85, fontSize: 16, right: 5 }}>Flat NO:-</Text>
               <FontAwesome5 name="sort-numeric-up-alt" size={24} color={themeColors.bg} style={{ right: 43, top: 55 }} />
               <View style={{ left: 10 }}>
                 <SelectCountry
@@ -219,7 +203,7 @@ const Search = ({ navigation }) => {
 
           <View style={{ bottom: 110 }}>
             <View style={{ bottom: 35 }}>
-              <Text style={{ fontWeight: '500', fontSize: 17, right: 5, bottom: 7 }}>SR_No:-</Text>
+              <Text style={{ fontWeight: '500', fontSize: 16, right: 5, bottom: 7 }}>SR_No:-</Text>
               <FontAwesome5 name="poll" size={25} color={themeColors.bg} style={{ right: 43, bottom: 30 }} />
               <TextInput style={{
                 marginLeft: 20,
@@ -227,15 +211,17 @@ const Search = ({ navigation }) => {
                 bottom: 30,
                 left: 70,
                 position: 'absolute',
-                borderBottomWidth: 1
+                borderBottomWidth: 1,
+
               }}
                 placeholder="Enter Service Request  "
                 onChangeText={text => setSearchText(text)}
                 value={searchText} />
+
             </View>
 
             <View style={{ bottom: 25 }}>
-              <Text style={{ fontWeight: '500', fontSize: 17, right: 8, bottom: 7 }}>Mobile_No:-</Text>
+              <Text style={{ fontWeight: '500', fontSize: 16, right: 8, bottom: 7 }}>Mobile_No:-</Text>
               <FontAwesome5 name="phone-volume" size={25} color={themeColors.bg} style={{ right: 40, bottom: 30 }} />
               <TextInput style={{
                 borderBottomWidth: 1,
@@ -254,7 +240,7 @@ const Search = ({ navigation }) => {
             </View>
 
             <View style={{ bottom: 20 }}>
-              <Text style={{ fontWeight: '500', fontSize: 17, bottom: 7 }}>Keyword:-</Text>
+              <Text style={{ fontWeight: '500', fontSize: 16, bottom: 7,right:5 }}>Keyword:-</Text>
               <FontAwesome5 name="file-word" size={25} color={themeColors.bg} style={{ right: 40, bottom: 30 }} />
               <TextInput style={{
                 borderBottomWidth: 1,
@@ -270,7 +256,7 @@ const Search = ({ navigation }) => {
             </View>
 
             <View style={{ bottom: 20 }}>
-              <Text style={{ fontWeight: '500', fontSize: 17, }}>Status:-</Text>
+              <Text style={{ fontWeight: '500', fontSize: 16, }}>Status:-</Text>
               <FontAwesome5 name="database" size={24} color={themeColors.bg} style={{ right: 42, bottom: 25 }} />
               <View style={{ bottom: 85, left: 10 }}>
                 <SelectCountry
@@ -338,7 +324,7 @@ const Search = ({ navigation }) => {
         </View>
       </View>
 
-      <Animated.View style={animatedStyles}>
+      <View style={{ bottom: 140 }}>
 
         {showData ?
           filteredData.length === 0 ? (
@@ -346,7 +332,7 @@ const Search = ({ navigation }) => {
           ) :
             (
               <FlatList
-                style={{ height: responsiveHeight(250), top: 10, bottom: 50, marginBottom: 100 }}
+                style={{ height: responsiveHeight(100), top: 10, }}
                 data={filteredData}
                 keyExtractor={item => item.id.toString()}
                 numColumns={1}
@@ -378,7 +364,7 @@ const Search = ({ navigation }) => {
                         top: 10,
                         paddingLeft: 20,
                         paddingRight: 20,
-                        
+
 
                       }}
                         onPress={() => navigation.navigate('ViewCom')}>
@@ -386,11 +372,10 @@ const Search = ({ navigation }) => {
                           alignSelf: "center", color: 'white', fontWeight: '700'
                         }}>View complaint</Text>
                       </TouchableOpacity>
-
                     </View>
                   </Pressable>)} />
             ) : null}
-      </Animated.View>
+      </View>
     </ScrollView>
 
   );
@@ -431,6 +416,7 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'white',
 
+
   }, item: {
     backgroundColor: '#f9c2ff',
     padding: 20,
@@ -443,13 +429,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 5,
     marginHorizontal: 10,
-    bottom: 20
+
+
   },
   container1: {
     backgroundColor: '#e5e5e5',
     padding: 15,
     borderRadius: 15,
     margin: 5,
+
     marginHorizontal: 20,
     paddingLeft: 50,
     paddingRight: 50,

@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Alert,
-  Animated,
+
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -11,13 +11,31 @@ import {
 import { CurvedBottomBarExpo } from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/FontAwesome5';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import Search from './Search';
 import SearchList from './SearchList';
 import ViewCom from './ViewCom';
 import DataList1 from './DataList1';
 import { themeColors } from './Theme/ThemeColor';
+
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler';
+
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+
+
+
+
 const stack = createNativeStackNavigator();
+
+
+
 
 
 const Screen3 = () => {
@@ -27,101 +45,140 @@ const Screen4 = () => {
   return <View style={styles.Screen4} />;
 };
 
+const TAB_WIDTH = 150;
 
 export default function MyTab() {
+  const pressed = useSharedValue(false);
+
+  const tap = Gesture.Tap()
+    .onBegin(() => {
+      pressed.value = true;
+    })
+    .onFinalize(() => {
+      pressed.value = false;
+    });
+
+  const animatedStyles = useAnimatedStyle(() => ({
+    backgroundColor: pressed.value ? themeColors.bg1 : themeColors.bg,
+    transform: [{ scale: withTiming(pressed.value ? 1.2 : 1) }],
+  }));
+
+
+  const offset = useSharedValue(-TAB_WIDTH);
+  const animatedStyles1 = useAnimatedStyle(() => ({
+    transform: [{ translateX: offset.value }],
+  }));
+
   const _renderIcon = (routeName, selectedTab) => {
     let icon = '';
+    const newOffset = (() => {
+      switch (routeName) {
+        case 'Home':
+          icon = 'home';
+          return -TAB_WIDTH;
 
-    switch (routeName) {
-      case 'Home':
-        icon = 'home';
-        break;
-      case 'Search':
-        icon = 'search';
-        break;
-      case 'Alart':
-        icon = 'bell';
-        break;
-      case 'Help':
-        icon = 'hands-helping';
-        break;
-    }
-
+        case 'Search':
+          icon = 'search';
+          return 0;
+        case 'Alart':
+          icon = 'bell';
+          return TAB_WIDTH;
+        case 'Help':
+          icon = 'hands-helping';
+          return -TAB_WIDTH;
+        default:
+          return TAB_WIDTH;
+      }
+    })();
+    offset.value = withTiming(newOffset);
     return (
       <Ionicons
         name={icon}
         size={25}
-        color={routeName === selectedTab ? 'red' : 'gray'}
-        
+        color={routeName === selectedTab ? 'white' : 'gray'}
       />
-
     );
   };
   const renderTabBar = ({ routeName, selectedTab, navigate }) => {
     return (
-      <TouchableOpacity
-        onPress={() => navigate(routeName)}
-        style={styles.tabbarItem}
+
+      <><TouchableOpacity
+      onPress={() => _renderIcon(routeName,selectedTab)}
+      style={styles.tabbarItem}
       >
-        {_renderIcon(routeName, selectedTab)}
-      </TouchableOpacity>
+        {_renderIcon(routeName,selectedTab)}
+      </TouchableOpacity><Animated.View style={[styles.animatedBorder, animatedStyles1]} />
+      </>
+
     );
   };
 
   return (
-    
-      <CurvedBottomBarExpo.Navigator
-        type="DOWN"
-        style={styles.bottomBar}
-        shadowStyle={styles.shawdow}
-        height={55}
-        
-        circleWidth={50}
-        bgColor="navy"
-        initialRouteName="title1"
-        borderTopLeftRight
-        renderCircle={({ selectedTab, navigate }) => (
-          <Animated.View style={styles.btnCircleUp}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => Alert.alert('Click Action')}
-            >
-              <Ionicons name={'plus'} color="gray" size={25} />
-            </TouchableOpacity>
 
-          </Animated.View>
-        )}
-        tabBar={renderTabBar}
-      >
-        <CurvedBottomBarExpo.Screen
-          name="Home"
-          position="LEFT"
-          component={DataList1}
-        />
+    <CurvedBottomBarExpo.Navigator
+      type="DOWN"
+      style={styles.bottomBar}
+      shadowStyle={styles.shawdow}
+      height={55}
 
-        <CurvedBottomBarExpo.Screen
-          name="Search"
-          component={Search}
-          position="LEFT"
-        />
+      circleWidth={50}
+      bgColor="#102C57"
+      initialRouteName="title1"
+      borderTopLeftRight
+      renderCircle={({ selectedTab, navigate }) => (
+        <GestureHandlerRootView style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100%',
 
-        <CurvedBottomBarExpo.Screen
-          name="Alart"
-          component={() => <Screen3 />}
-          position="RIGHT"
-        />
+        }}>
 
-        <CurvedBottomBarExpo.Screen
-          name="Help"
-          position="RIGHT"
-          component={() => <Screen4 />}
-        />
-        <stack.Screen name='SearchList' options={{ headerShown: true }} component={SearchList} />
-        <stack.Screen name='ViewCom' options={{ headerShown: true }} component={ViewCom} />
+          <GestureDetector gesture={tap}>
+            <Animated.View style={[styles.btnCircleUp, animatedStyles]}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => Alert.alert('Click Action')}
+              >
+                <Ionicons name={'plus'} color="gray" size={25} />
+              </TouchableOpacity>
 
-      </CurvedBottomBarExpo.Navigator>
+            </Animated.View>
+          </GestureDetector>
+        </GestureHandlerRootView>
+      )}
+      tabBar={renderTabBar}
+    >
+      <CurvedBottomBarExpo.Screen
 
-  
+        name="Home"
+        position="LEFT"
+        component={DataList1}
+      />
+
+      <CurvedBottomBarExpo.Screen
+        name="Search"
+        component={Search}
+        position="LEFT"
+      />
+
+      <CurvedBottomBarExpo.Screen
+        name="Alart"
+        component={() => <Screen3 />}
+        position="RIGHT"
+      />
+
+      <CurvedBottomBarExpo.Screen
+        name="Help"
+        position="RIGHT"
+        component={() => <Screen4 />}
+      />
+      <stack.Screen name='SearchList' options={{ headerShown: true }} component={SearchList} />
+      <stack.Screen name='ViewCom' options={{ headerShown: true }} component={ViewCom} />
+
+    </CurvedBottomBarExpo.Navigator>
+
+
   );
 }
 
@@ -190,5 +247,11 @@ export const styles = StyleSheet.create({
   Screen4: {
     flex: 1,
     backgroundColor: '#FFEBCD',
+  }, animatedBorder: {
+    height: 8,
+    width: 64,
+    backgroundColor: 'tomato',
+    borderRadius: 20,
+
   },
 });
