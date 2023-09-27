@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { Text, View, TouchableOpacity,  Image, StyleSheet, SafeAreaView, TextInput } from 'react-native'
+import { Text, View, TouchableOpacity, Image, StyleSheet, SafeAreaView, TextInput } from 'react-native'
 import { themeColors } from './Theme/ThemeColor';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { LinearGradient } from 'expo-linear-gradient';
 import { responsiveFontSize, responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
-
+import { OnboardFlow } from 'react-native-onboard';
 
 
 const Login = ({ navigation }) => {
@@ -20,6 +20,58 @@ const Login = ({ navigation }) => {
   return (
 
     <SafeAreaView style={{ backgroundColor: themeColors.bg, flex: 1 }} >
+      <OnboardFlow 
+      style={{opacity:0.9,backgroundColor:'orange'}}
+        paginationColor='#984065'
+        paginationSelectedColor='gray'
+        pageStyle={{ backgroundColor: "#fff", opacity: 0.9,borderBottomLeftRadius:30,borderBottomRightRadius:30, }}
+        pages={[
+          {
+            
+            title: 'Welcome to Blue app',
+            subtitle: 'This is page 1',
+            imageUri: 'https://frigade.com/img/example1.png',
+          
+            subtitleStyle: ({ color: "gray", }),
+            titleStyle: ({
+              bottom:10
+             ,borderRadius:8,
+             backgroundColor: "#ffff",
+             shadowColor: "black",
+             shadowOffset: {
+               width: 0,
+               height: 50,
+             },
+             shadowOpacity: 0.8,
+             shadowRadius: 16.00,
+             elevation: 24,
+
+
+            })
+          },
+          {
+            title: 'Easy to Complan',
+            subtitle: 'This is page 2',
+            imageUri: 'https://frigade.com/img/example2.png',
+            titleStyle: ({
+              bottom:10
+             ,borderRadius:8,
+             backgroundColor: "#ffff",
+             shadowColor: "black",
+             shadowOffset: {
+               width: 0,
+               height: 50,
+             },
+             shadowOpacity: 0.8,
+             shadowRadius: 16.00,
+             elevation: 24,
+
+
+            })
+          }
+        ]}
+        type={'fullscreen'}
+      />
       <LinearGradient colors={[themeColors.bg, themeColors.bg, '#79155B']} style={{
         position: 'absolute',
         left: 0,
@@ -30,7 +82,7 @@ const Login = ({ navigation }) => {
       <Image source={require("../assets/myimage.jpg")} style={{
         position: 'absolute', alignSelf: 'center', top: 50, borderRadius: responsiveWidth(30), height: responsiveHeight(10),
         width: responsiveWidth(10), padding: responsiveWidth(15)
-      }}/>
+      }} />
 
       <View style={{
         paddingTop: responsiveHeight(7), backgroundColor: '#fff', top: responsiveHeight(28), flex: 1, borderTopLeftRadius: responsiveWidth(12), borderTopRightRadius: responsiveWidth(11),

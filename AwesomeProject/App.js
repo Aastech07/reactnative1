@@ -12,6 +12,7 @@ import Search from './Components/Search';
 import Media from './Components/Media';
 import { themeColors } from './Components/Theme/ThemeColor';
 import DataList1 from './Components/DataList1';
+
 const stack = createNativeStackNavigator();
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
     <><StatusBar barStyle="dark-content" hidden={false} backgroundColor={themeColors.bg} translucent={true} />
       <NavigationContainer >
         <stack.Navigator>
+         
           <stack.Screen name='Login' options={{ headerShown: false }} component={Login} />
           <stack.Screen name='Register' options={{
             headerStyle: {
@@ -52,6 +54,7 @@ export default function App() {
           <stack.Screen name='Search' options={{ headerShown: false }} component={Search} />
           <stack.Screen name='Media' options={{ headerShown: false }} component={Media} />
         </stack.Navigator>
+
       </NavigationContainer></>
   );
 }

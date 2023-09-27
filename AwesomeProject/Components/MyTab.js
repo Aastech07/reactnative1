@@ -30,13 +30,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 
-
-
 const stack = createNativeStackNavigator();
-
-
-
-
 
 const Screen3 = () => {
   return <View style={styles.Screen3} />;
@@ -45,7 +39,7 @@ const Screen4 = () => {
   return <View style={styles.Screen4} />;
 };
 
-const TAB_WIDTH = 150;
+
 
 export default function MyTab() {
   const pressed = useSharedValue(false);
@@ -63,34 +57,30 @@ export default function MyTab() {
     transform: [{ scale: withTiming(pressed.value ? 1.2 : 1) }],
   }));
 
+ 
 
-  const offset = useSharedValue(-TAB_WIDTH);
-  const animatedStyles1 = useAnimatedStyle(() => ({
-    transform: [{ translateX: offset.value }],
-  }));
+
 
   const _renderIcon = (routeName, selectedTab) => {
     let icon = '';
-    const newOffset = (() => {
-      switch (routeName) {
-        case 'Home':
-          icon = 'home';
-          return -TAB_WIDTH;
 
-        case 'Search':
-          icon = 'search';
-          return 0;
-        case 'Alart':
-          icon = 'bell';
-          return TAB_WIDTH;
-        case 'Help':
-          icon = 'hands-helping';
-          return -TAB_WIDTH;
-        default:
-          return TAB_WIDTH;
-      }
-    })();
-    offset.value = withTiming(newOffset);
+    switch (routeName) {
+      case 'Home':
+        icon = 'home';
+        break;
+      case 'Search':
+        icon = 'search';
+        break;
+      case 'Alart':
+        icon = 'bell';
+        break;
+      case 'Help':
+        icon = 'hands-helping';
+        break;
+
+    }
+
+
     return (
       <Ionicons
         name={icon}
@@ -101,20 +91,22 @@ export default function MyTab() {
   };
   const renderTabBar = ({ routeName, selectedTab, navigate }) => {
     return (
+     
+        
+            <TouchableOpacity
 
-      <><TouchableOpacity
-      onPress={() => _renderIcon(routeName,selectedTab)}
-      style={styles.tabbarItem}
-      >
-        {_renderIcon(routeName,selectedTab)}
-      </TouchableOpacity><Animated.View style={[styles.animatedBorder, animatedStyles1]} />
-      </>
+              onPress={() => navigate(routeName, selectedTab)}
+              style={styles.tabbarItem}
+            >
+              {_renderIcon(routeName, selectedTab)}
+            </TouchableOpacity>
+         
+      
 
     );
   };
 
   return (
-
     <CurvedBottomBarExpo.Navigator
       type="DOWN"
       style={styles.bottomBar}
@@ -125,7 +117,7 @@ export default function MyTab() {
       bgColor="#102C57"
       initialRouteName="title1"
       borderTopLeftRight
-      renderCircle={({ selectedTab, navigate }) => (
+      renderCircle={({ }) => (
         <GestureHandlerRootView style={{
           flex: 1,
           alignItems: 'center',
@@ -175,13 +167,11 @@ export default function MyTab() {
       />
       <stack.Screen name='SearchList' options={{ headerShown: true }} component={SearchList} />
       <stack.Screen name='ViewCom' options={{ headerShown: true }} component={ViewCom} />
-
     </CurvedBottomBarExpo.Navigator>
 
 
   );
 }
-
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -247,11 +237,6 @@ export const styles = StyleSheet.create({
   Screen4: {
     flex: 1,
     backgroundColor: '#FFEBCD',
-  }, animatedBorder: {
-    height: 8,
-    width: 64,
-    backgroundColor: 'tomato',
-    borderRadius: 20,
-
   },
+
 });

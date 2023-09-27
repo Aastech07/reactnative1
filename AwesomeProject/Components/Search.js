@@ -5,6 +5,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { responsiveFontSize, responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import { themeColors } from './Theme/ThemeColor';
 
+
 const Local_data = [
   {
     id: "0",
@@ -122,7 +123,7 @@ const Search = ({ navigation }) => {
     setShowData(true);
   };
 
-  
+
 
   return (
     <ScrollView style={{}}>
@@ -240,7 +241,7 @@ const Search = ({ navigation }) => {
             </View>
 
             <View style={{ bottom: 20 }}>
-              <Text style={{ fontWeight: '500', fontSize: 16, bottom: 7,right:5 }}>Keyword:-</Text>
+              <Text style={{ fontWeight: '500', fontSize: 16, bottom: 7, right: 5 }}>Keyword:-</Text>
               <FontAwesome5 name="file-word" size={25} color={themeColors.bg} style={{ right: 40, bottom: 30 }} />
               <TextInput style={{
                 borderBottomWidth: 1,
